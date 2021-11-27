@@ -1,3 +1,5 @@
+#+PROPERTY: header-args :results output :exports both :tangle yes
+#+PROPERTY: header-args:scheme  :session *scheme*
 * Лабораторная работа №4
   :PROPERTIES:
   :CUSTOM_ID: лабораторная-работа-4
@@ -40,7 +42,7 @@
 диагностического сообщения вида =FAILED: условие=. Пример использования
 каркаса:
 
-#+begin_src scheme
+#+begin_src scheme :eval never :tangle no
   (use-assertions) ; Инициализация вашего каркаса перед использованием
 
   ; Определение процедуры, требующей верификации переданного ей значения:
@@ -71,7 +73,49 @@
 #+begin_example
   (use-syntax (ice-9 syncase))
 #+end_example
+**** решение
+#+begin_src scheme :results none
 
+(define (exit) (display "please call (use-assertions) before using (assert ...)"))
+
+(define-syntax use-assertions
+  (syntax-rules ()
+    ((use-assertions)
+     (call-with-current-continuation
+       (lambda (cont)
+         (set! exit cont))))))
+
+(define-syntax assert
+  (syntax-rules ()
+    ((assert expr)
+     (if (not expr)
+         (begin
+           (display "FAILED: ")
+           (write 'expr)
+           (newline)
+           (exit))))))
+#+end_src
+**** тесты
+#+begin_src scheme :results none
+(define (1/x x)
+  (assert (not (zero? x))) ; Утверждение: x ДОЛЖЕН БЫТЬ ≠ 0
+  (/ 1 x))
+
+(use-assertions)
+#+end_src
+
+#+begin_src scheme :results value drawer
+(map 1/x '(1 2 3 4 5)) ; ВЕРНЕТ список значений в программу
+#+end_src
+
+#+RESULTS:
+:results:
+(1 1/2 1/3 1/4 1/5)
+:end:
+
+#+begin_src scheme :results none :eval never
+(map 1/x '(-2 -1 0 1 2)) ; ВЫВЕДЕТ в консоль сообщение и завершит работу программы
+#+end_src
 *** 2. Код как данные. Порты ввода-вывода.
     :PROPERTIES:
     :CUSTOM_ID: код-как-данные.-порты-ввода-вывода.
@@ -82,14 +126,49 @@
   последующего чтения данных (десериализации) из такого файла:
 
   #+begin_example
-    (save-data данные путь-к-файлу)
-    (load-data путь-к-файлу) ⇒ данные
+(save-data данные путь-к-файлу)
+(load-data путь-к-файлу) ⇒ данные
   #+end_example
 
+  - решение
+    #+begin_src scheme :results none
+
+    (define (save-data data path)
+    (with-output-to-file path (lambda ()
+                                (write data))))
+
+    (define (load-data path)
+    (with-input-from-file path (lambda ()
+                                (read))))
+    #+end_src
 - /Подсчет строк в текстовом файле./ Реализуйте процедуру, принимающую в
   качестве аргумента путь к текстовому файлу и возвращающую число
   /непустых/ строк в этом файле. Используйте процедуры, разработанные
   вами ранее в рамках выполнения домашних заданий.
+  - решение
+    #+begin_src scheme :results none
+(define (file-nonempty-lines-count path)
+  (with-input-from-file path (lambda ()
+                               (let loop ((prev #\newline)
+                                          (k 0))
+                                 (let ((cur (read-char)))
+                                   (if (eof-object? cur)
+                                       (if (equal? #\newline prev)
+                                           k
+                                           (+ k 1))
+                                       (if (and (equal? #\newline cur)
+                                                (not (equal? #\newline prev)))
+                                           (loop cur (+ k 1))
+                                           (loop cur k))))))))
+    #+end_src
+
+  - тесты
+    #+begin_src scheme
+(display (file-nonempty-lines-count "./lab4.org"))
+    #+end_src
+
+    #+RESULTS:
+    : 338
 
 *** 3. Мемоизация результатов вычислений.
     :PROPERTIES:
@@ -161,12 +240,14 @@
 
 Пример:
 
-#+begin_src scheme
+#+begin_src scheme :tangle no :eval never
   ; Пусть x = 1
   ;
   (when   (> x 0) (display "x > 0")  (newline))
   (unless (= x 0) (display "x != 0") (newline))
 #+end_src
+
+#+RESULTS:
 
 В стандартный поток будет выведено:
 
@@ -193,7 +274,7 @@
 
 Примеры применения:
 
-#+begin_src scheme
+#+begin_src scheme :tangle no :eval never
   (for i in '(1 2 3)
     (for j in '(4 5 6)
       (display (list i j))
@@ -204,6 +285,8 @@
       (display (list i j))
       (newline)))
 #+end_src
+
+#+RESULTS:
 
 **** В. Цикл /while/
      :PROPERTIES:
@@ -222,7 +305,7 @@
 
 Пример применения:
 
-#+begin_src scheme
+#+begin_src scheme :tangle no :eval never
   (let ((p 0)
         (q 0))
     (while (< p 3)
@@ -233,6 +316,9 @@
                   (set! q (+ q 1)))
            (set! p (+ p 1))))
 #+end_src
+
+#+RESULTS:
+: #f
 
 Выведет:
 
@@ -281,7 +367,7 @@
 
 Например:
 
-#+begin_src scheme
+#+begin_src scheme :tangle no :eval never
   (let ((i 0)
         (j 0))
     (repeat ((set! j 0)
@@ -292,6 +378,8 @@
              (newline))
             until (= i 3)))
 #+end_src
+
+#+RESULTS:
 
 Выведет:
 
