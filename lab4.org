@@ -1,10 +1,7 @@
-#+PROPERTY: header-args :results output :exports both :tangle yes
+#+PROPERTY: header-args :results output :exports both :tangle ./lab4.scm
 #+PROPERTY: header-args:scheme  :session *scheme*
-* Лабораторная работа №4
-  :PROPERTIES:
-  :CUSTOM_ID: лабораторная-работа-4
-  :END:
-** Цели работы
+#+TITLE: Лабораторная работа №4
+* Цели работы
    :PROPERTIES:
    :CUSTOM_ID: цели-работы
    :END:
@@ -17,11 +14,11 @@
 предлагается ознакомится с типичным применением программирования с
 использованием продолжений.
 
-** Задания
+* Задания
    :PROPERTIES:
    :CUSTOM_ID: задания
    :END:
-*** 1. Продолжения.
+** 1. Продолжения.
     :PROPERTIES:
     :CUSTOM_ID: продолжения.
     :END:
@@ -37,32 +34,32 @@
 Реализуйте каркас (фреймворк) для отладки с помощью утверждений. Пусть
 Ваш каркас перед использованием инициализируется вызовом
 =(use-assertions)=, а сами утверждения записываются в коде ниже в виде
-=(assert условие)=. Если условие не выполнено, происходит завершение
+=(assert <statement>)=. Если условие не выполнено, происходит завершение
 работы программы без возникновения ошибки выполнения и вывод в консоль
-диагностического сообщения вида =FAILED: условие=. Пример использования
+диагностического сообщения вида =FAILED: <statement>=. Пример использования
 каркаса:
 
 #+begin_src scheme :eval never :tangle no
-  (use-assertions) ; Инициализация вашего каркаса перед использованием
+(use-assertions) ; Инициализация вашего каркаса перед использованием
 
-  ; Определение процедуры, требующей верификации переданного ей значения:
+; Определение процедуры, требующей верификации переданного ей значения:
 
-  (define (1/x x)
-    (assert (not (zero? x))) ; Утверждение: x ДОЛЖЕН БЫТЬ ≠ 0
-    (/ 1 x))
+(define (1/x x)
+  (assert (not (zero? x))) ; Утверждение: x ДОЛЖЕН БЫТЬ ≠ 0
+  (/ 1 x))
 
-  ; Применение процедуры с утверждением:
+; Применение процедуры с утверждением:
 
-  (map 1/x '(1 2 3 4 5)) ; ВЕРНЕТ список значений в программу
+(map 1/x '(1 2 3 4 5)) ; ВЕРНЕТ список значений в программу
 
-  (map 1/x '(-2 -1 0 1 2)) ; ВЫВЕДЕТ в консоль сообщение и завершит работу программы
+(map 1/x '(-2 -1 0 1 2)) ; ВЫВЕДЕТ в консоль сообщение и завершит работу программы
 #+end_src
 
 Сообщение, которое должно быть выведено при выполнении примера,
 показанного выше:
 
 #+begin_example
-  FAILED: (not (zero? x))
+FAILED: (not (zero? x))
 #+end_example
 
 Важно! Если в программе используются гигиенические макросы и эта
@@ -73,7 +70,7 @@
 #+begin_example
   (use-syntax (ice-9 syncase))
 #+end_example
-**** решение
+*** решение
 #+begin_src scheme :results none
 
 (define (exit) (display "please call (use-assertions) before using (assert ...)"))
@@ -95,7 +92,7 @@
            (newline)
            (exit))))))
 #+end_src
-**** тесты
+*** тесты
 #+begin_src scheme :results none
 (define (1/x x)
   (assert (not (zero? x))) ; Утверждение: x ДОЛЖЕН БЫТЬ ≠ 0
@@ -104,7 +101,7 @@
 (use-assertions)
 #+end_src
 
-#+begin_src scheme :results value drawer
+#+begin_src scheme :results value drawer :exports both
 (map 1/x '(1 2 3 4 5)) ; ВЕРНЕТ список значений в программу
 #+end_src
 
@@ -116,7 +113,7 @@
 #+begin_src scheme :results none :eval never
 (map 1/x '(-2 -1 0 1 2)) ; ВЫВЕДЕТ в консоль сообщение и завершит работу программы
 #+end_src
-*** 2. Код как данные. Порты ввода-вывода.
+** 2. Код как данные. Порты ввода-вывода.
     :PROPERTIES:
     :CUSTOM_ID: код-как-данные.-порты-ввода-вывода.
     :END:
@@ -132,14 +129,13 @@
 
   - решение
     #+begin_src scheme :results none
+(define (save-data data path)
+(with-output-to-file path (lambda ()
+                            (write data))))
 
-    (define (save-data data path)
-    (with-output-to-file path (lambda ()
-                                (write data))))
-
-    (define (load-data path)
-    (with-input-from-file path (lambda ()
-                                (read))))
+(define (load-data path)
+(with-input-from-file path (lambda ()
+                            (read))))
     #+end_src
 - /Подсчет строк в текстовом файле./ Реализуйте процедуру, принимающую в
   качестве аргумента путь к текстовому файлу и возвращающую число
@@ -163,14 +159,14 @@
     #+end_src
 
   - тесты
-    #+begin_src scheme
+    #+begin_src scheme :exports both
 (display (file-nonempty-lines-count "./lab4.org"))
     #+end_src
 
     #+RESULTS:
-    : 338
+    : 458
 
-*** 3. Мемоизация результатов вычислений.
+** 3. Мемоизация результатов вычислений.
     :PROPERTIES:
     :CUSTOM_ID: мемоизация-результатов-вычислений.
     :END:
@@ -190,7 +186,112 @@
 измерения вычисления рекомендуется использовать команду REPL Guile
 =time= (Guile 2.x).
 
-*** 4. Отложенные вычисления.
+*** Решение без мемоизации
+#+begin_src scheme :results none :session tribonacci
+(define (tribonacci n)
+  (cond ((= n 0) 0)
+        ((<= n 2) 1)
+        (else (let loop ((n (- n 2))
+                         (first 0)
+                         (second 1)
+                         (third 1))
+                (if (= n 0)
+                    third
+                    (loop (- n 1) second third (+ first second third)))))))
+#+end_src
+**** Тесты
+#+begin_src scheme :results none :session tribonacci
+(load "./unit-test.scm")
+#+end_src
+#+begin_src scheme :session tribonacci :exports both
+(define tests
+  (list (test (tribonacci 0) 0)
+        (test (tribonacci 1) 1)
+        (test (tribonacci 2) 1)
+        (test (tribonacci 3) 2)
+        (test (tribonacci 4) 4)
+        (test (tribonacci 4) 4)
+        (test (tribonacci 5) 7)))
+
+(run-tests tests)
+(use-modules (ice-9 time))
+(time (tribonacci 9000))
+(time (tribonacci 90000))
+(time (tribonacci 90050))
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Test 1: (tribonacci 0) ok
+Test 2: (tribonacci 1) ok
+Test 3: (tribonacci 2) ok
+Test 4: (tribonacci 3) ok
+Test 5: (tribonacci 4) ok
+Test 6: (tribonacci 4) ok
+Test 7: (tribonacci 5) ok
+clock utime stime cutime cstime gctime
+ 0.01  0.06  0.00   0.00   0.00   0.06
+clock utime stime cutime cstime gctime
+ 0.84  4.15  0.19   0.00   0.00   4.21
+clock utime stime cutime cstime gctime
+ 0.83  4.16  0.18   0.00   0.00   4.20
+#+end_example
+*** Решение с мемоизацией
+#+begin_src scheme :results none :session tribonacci-memo
+(define tribonacci-memo
+  (let ((known-results '()))
+    (lambda (n)
+      (let* ((args n)
+             (res (assoc args known-results)))
+        (if res
+            (cadr res)
+            (let ((res (cond ((= n 0) 0)
+                             ((<= n 2) 1)
+                             (else (+ (tribonacci-memo (- n 3))
+                                      (tribonacci-memo (- n 2))
+                                      (tribonacci-memo (- n 1)))))))
+              (set! known-results (cons (list args res) known-results))
+              res))))))
+#+end_src
+**** Тесты
+#+begin_src scheme :results none :session tribonacci-memo
+(load "./unit-test.scm")
+#+end_src
+#+begin_src scheme :session tribonacci-memo :exports both
+(define tests
+  (list (test (tribonacci-memo 0) 0)
+        (test (tribonacci-memo 1) 1)
+        (test (tribonacci-memo 2) 1)
+        (test (tribonacci-memo 3) 2)
+        (test (tribonacci-memo 4) 4)
+        (test (tribonacci-memo 4) 4)
+        (test (tribonacci-memo 5) 7)))
+
+(run-tests tests)
+(use-modules (ice-9 time))
+(time (tribonacci-memo 9000))
+(time (tribonacci-memo 90000))
+(time (tribonacci-memo 90050))
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Test 1: (tribonacci-memo 0) ok
+Test 2: (tribonacci-memo 1) ok
+Test 3: (tribonacci-memo 2) ok
+Test 4: (tribonacci-memo 3) ok
+Test 5: (tribonacci-memo 4) ok
+Test 6: (tribonacci-memo 4) ok
+Test 7: (tribonacci-memo 5) ok
+clock utime stime cutime cstime gctime
+ 0.10  0.10  0.00   0.00   0.00   0.00
+clock utime stime cutime cstime gctime
+12.89 13.36  0.03   0.00   0.00   0.92
+clock utime stime cutime cstime gctime
+ 0.02  0.02  0.00   0.00   0.00   0.00
+#+end_example
+
+** 4. Отложенные вычисления.
     :PROPERTIES:
     :CUSTOM_ID: отложенные-вычисления.
     :END:
@@ -208,21 +309,112 @@
 /Запрещается/ использовать встроенные условные конструкции =if=, =cond=,
 =case= и перехват исключений.
 
-*** 5. Локальные определения.
+*** Решение
+#+begin_src scheme :results none
+(define-syntax my-if
+  (syntax-rules ()
+    ((my-if condition statement1 statement2)
+     (let ((promise1 (delay statement1))
+           (promise2 (delay statement2)))
+       (force (or (and condition promise1) promise2))))))
+#+end_src
+*** Тесты
+#+begin_src scheme :eval never
+(load "./unit-test.scm")
+(define tests
+  (list (test (my-if #t 1 (/ 1 0)) 1)
+        (test (my-if #f (/ 1 0) 1) 1)
+        (test (my-if (= (+ 1 1) 2) 2 (/ 1 0)) 2)))
+(run-tests tests)
+#+end_src
+
+#+RESULTS:
+: Test 1: (my-if #t 1 (/ 1 0)) ok
+: Test 2: (my-if #f (/ 1 0) 1) ok
+: Test 3: (my-if (= (+ 1 1) 2) 2 (/ 1 0)) ok
+** 5. Локальные определения.
     :PROPERTIES:
     :CUSTOM_ID: локальные-определения.
     :END:
 Реализуйте макросы =my-let= и =my-let*=, полностью воспроизводящие
 поведение встроенных макросов =let= и =let*=.
+*** Решение
+**** let
+первое приближение:
+#+begin_src scheme :results none
+(define-syntax my-let
+  (syntax-rules ()
+    ((my-let ()
+             expr)
+     expr)
+    ((my-let ((var1 expr1) (varn exprn) ...)
+             expr)
+     ((lambda (var1)
+        (my-let ((varn exprn) ...)
+                expr))
+      expr1))))
+#+end_src
+второе приближение:
+#+begin_src scheme :results none
+(define-syntax my-let
+  (syntax-rules ()
+    ((my-let ((var val) ...)
+             expr)
+     ((lambda (var ...)
+        expr)
+      val ...))))
+#+end_src
+**** let*
+#+begin_src scheme :results none
+(define-syntax my-let*
+  (syntax-rules ()
+    ((my-let* ()
+             expr)
+     expr)
+    ((my-let* ((var1 expr1) (varn exprn) ...)
+             expr)
+     ((lambda (var1)
+        (my-let* ((varn exprn) ...)
+                expr))
+      expr1))))
+#+end_src
+*** Тесты
+**** let
+#+begin_src scheme :eval never
+(define tests
+  (list
+   (test (my-let ((x 5) (y 7))
+                 (+ x 1 y))
+         13)
+   (test (my-let ((=> #f))
+           (cond (#t => 'ok)))
+         ok)))
 
-*** 6. Управляющие конструкции.
+(run-tests tests)
+#+end_src
+
+#+RESULTS:
+: Test 1: (my-let ((x 5) (y 7)) (+ x 1 y)) ok
+: Test 2: (my-let ((=> #f)) (cond (#t => (quote ok)))) ok
+**** let*
+#+begin_src scheme :eval never
+(define tests
+  (list
+   (test (my-let* ((x 5) (y (+ x 7)))
+                  y) 12)))
+
+(run-tests tests)
+#+end_src
+#+RESULTS:
+: Test 1: (my-let* ((x 5) (y (+ x 7))) y) ok
+** 6. Управляющие конструкции.
     :PROPERTIES:
     :CUSTOM_ID: управляющие-конструкции.
     :END:
 Используя /гигиенические/ макросы языка Scheme, реализуйте управляющие
 конструкции, свойственные императивным языкам программирования.
 
-**** А. Условия /when/ и /unless/
+*** А. Условия /when/ и /unless/
      :PROPERTIES:
      :CUSTOM_ID: а.-условия-when-и-unless
      :END:
@@ -247,8 +439,6 @@
   (unless (= x 0) (display "x != 0") (newline))
 #+end_src
 
-#+RESULTS:
-
 В стандартный поток будет выведено:
 
 #+begin_example
@@ -256,7 +446,32 @@
   x != 0
 #+end_example
 
-**** Б. Циклы /for/
+**** Решение
+#+begin_src scheme :results none
+(define-syntax when
+  (syntax-rules ()
+    ((when test expr ...)
+     (if test
+         (begin expr ...)))))
+
+(define-syntax unless
+  (syntax-rules ()
+    ((unless test expr ...)
+     (if (not test)
+         (begin expr ...)))))
+#+end_src
+**** Тесты
+#+begin_src scheme
+(define x 1)
+(when   (> x 0) (display "x > 0")  (newline))
+(unless (= x 0) (display "x != 0") (newline))
+#+end_src
+
+#+RESULTS:
+: x > 0
+: x != 0
+
+*** Б. Циклы /for/
      :PROPERTIES:
      :CUSTOM_ID: б.-циклы-for
      :END:
@@ -285,10 +500,55 @@
       (display (list i j))
       (newline)))
 #+end_src
+**** Решение
+#+begin_src scheme :results none
+(define-syntax for
+  (syntax-rules (in as)
+    ((for x in xs expr ...)
+     (let loop ((values xs))
+       (if (not (null? values))
+           (let ((x (car values)))
+             (begin expr ...)
+             (loop (cdr values))))))
+    ((for xs as x expr ...)
+     (for x in xs expr ...))))
+#+end_src
+**** Тесты
+#+begin_src scheme
+(for i in '(1 2 3)
+(for j in '(4 5 6)
+    (display (list i j))
+    (newline)))
+
+(for '(1 2 3) as i
+(for '(4 5 6) as j
+    (display (list i j))
+    (newline)))
+#+end_src
 
 #+RESULTS:
+#+begin_example
+(1 4)
+(1 5)
+(1 6)
+(2 4)
+(2 5)
+(2 6)
+(3 4)
+(3 5)
+(3 6)
+(1 4)
+(1 5)
+(1 6)
+(2 4)
+(2 5)
+(2 6)
+(3 4)
+(3 5)
+(3 6)
+#+end_example
 
-**** В. Цикл /while/
+*** В. Цикл /while/
      :PROPERTIES:
      :CUSTOM_ID: в.-цикл-while
      :END:
@@ -316,9 +576,6 @@
                   (set! q (+ q 1)))
            (set! p (+ p 1))))
 #+end_src
-
-#+RESULTS:
-: #f
 
 Выведет:
 
@@ -350,7 +607,41 @@
     => (0 1 2 3 4 5 6 7 8 9)
 #+end_example
 
-**** Г. Цикл /repeat..until/
+**** Решение
+#+begin_src scheme :results none
+(define-syntax while
+  (syntax-rules ()
+    ((while cond? expr ...)
+     (let loop ()
+       (if cond?
+           (begin expr ...
+                  (loop)))))))
+#+end_src
+**** Тесты
+#+begin_src scheme
+(let ((p 0)
+      (q 0))
+  (while (< p 3)
+    (set! q 0)
+    (while (< q 3)
+      (display (list p q))
+      (newline)
+      (set! q (+ q 1)))
+    (set! p (+ p 1))))
+#+end_src
+
+#+RESULTS:
+: (0 0)
+: (0 1)
+: (0 2)
+: (1 0)
+: (1 1)
+: (1 2)
+: (2 0)
+: (2 1)
+: (2 2)
+
+*** Г. Цикл /repeat..until/
      :PROPERTIES:
      :CUSTOM_ID: г.-цикл-repeat..until
      :END:
@@ -379,8 +670,6 @@
             until (= i 3)))
 #+end_src
 
-#+RESULTS:
-
 Выведет:
 
 #+begin_example
@@ -389,10 +678,62 @@
   (2 0)(2 1)(2 2)
 #+end_example
 
+**** Решение
+#+begin_src scheme :results none
+(define-syntax repeat
+  (syntax-rules (until)
+    ((repeat (expr ...) until cond?)
+     (let loop ()
+       (begin expr ...
+              (if (not cond?) (loop)))))))
+#+end_src
+**** Тесты
+#+begin_src scheme
+(let ((i 0)
+      (j 0))
+  (repeat ((set! j 0)
+           (repeat ((display (list i j))
+                    (set! j (+ j 1)))
+                   until (= j 3))
+           (set! i (+ i 1))
+           (newline))
+          until (= i 3)))
+#+end_src
+
+#+RESULTS:
+: (0 0)(0 1)(0 2)
+: (1 0)(1 1)(1 2)
+: (2 0)(2 1)(2 2)
+
+**** Без тела цикла в скобках
+
 Подумайте, зачем требуется заключать тело цикла в круглые скобки? Как
 изменится макрос, если отказаться от этих скобок?
+#+begin_src scheme
+(define-syntax repeat
+  (syntax-rules (until)
+    ((repeat expr ... until cond?)
+     (let loop ()
+       (begin expr ...
+              (if (not cond?) (loop)))))))
 
-**** Д. Вывод «в стиле С++»
+(let ((i 0)
+      (j 0))
+  (repeat (set! j 0)
+           (repeat (display (list i j))
+                    (set! j (+ j 1))
+                   until (= j 3))
+           (set! i (+ i 1))
+           (newline)
+          until (= i 3)))
+#+end_src
+
+#+RESULTS:
+: (0 0)(0 1)(0 2)
+: (1 0)(1 1)(1 2)
+: (2 0)(2 1)(2 2)
+
+*** Д. Вывод «в стиле С++»
      :PROPERTIES:
      :CUSTOM_ID: д.-вывод-в-стиле-с
      :END:
@@ -413,3 +754,26 @@
   a = 1
   b = 2
 #+end_example
+**** Решение
+#+begin_src scheme :results none
+(define-syntax cout
+  (syntax-rules (<< endl)
+    ((cout << endl)
+     (newline))
+    ((cout << elem)
+     (display elem))
+    ((cout << endl others ...)
+     (begin (newline)
+            (cout others ...)))
+    ((cout << elem others ...)
+     (begin (display elem)
+            (cout others ...)))))
+#+end_src
+**** Тесты
+#+begin_src scheme
+(cout << "a = " << 1 << endl << "b = " << 2 << endl)
+#+end_src
+
+#+RESULTS:
+: a = 1
+: b = 2

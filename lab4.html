@@ -1,0 +1,1279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-28 Sun 23:00 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Лабораторная работа №4</title>
+<meta name="author" content="Starovoytov Alexandr" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Лабораторная работа №4</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#цели-работы">1. Цели работы</a></li>
+<li><a href="#задания">2. Задания</a>
+<ul>
+<li><a href="#продолжения.">2.1. 1. Продолжения.</a>
+<ul>
+<li><a href="#orgd8ccaee">2.1.1. решение</a></li>
+<li><a href="#org1de95e8">2.1.2. тесты</a></li>
+</ul>
+</li>
+<li><a href="#код-как-данные.-порты-ввода-вывода.">2.2. 2. Код как данные. Порты ввода-вывода.</a></li>
+<li><a href="#мемоизация-результатов-вычислений.">2.3. 3. Мемоизация результатов вычислений.</a>
+<ul>
+<li><a href="#orga2c0df8">2.3.1. Решение без мемоизации</a></li>
+<li><a href="#org3a9e9df">2.3.2. Решение с мемоизацией</a></li>
+</ul>
+</li>
+<li><a href="#отложенные-вычисления.">2.4. 4. Отложенные вычисления.</a>
+<ul>
+<li><a href="#org191ae04">2.4.1. Решение</a></li>
+<li><a href="#org3b44654">2.4.2. Тесты</a></li>
+</ul>
+</li>
+<li><a href="#локальные-определения.">2.5. 5. Локальные определения.</a>
+<ul>
+<li><a href="#org0b6ec86">2.5.1. Решение</a></li>
+<li><a href="#orgf24a134">2.5.2. Тесты</a></li>
+</ul>
+</li>
+<li><a href="#управляющие-конструкции.">2.6. 6. Управляющие конструкции.</a>
+<ul>
+<li><a href="#а.-условия-when-и-unless">2.6.1. А. Условия <i>when</i> и <i>unless</i></a></li>
+<li><a href="#б.-циклы-for">2.6.2. Б. Циклы <i>for</i></a></li>
+<li><a href="#в.-цикл-while">2.6.3. В. Цикл <i>while</i></a></li>
+<li><a href="#г.-цикл-repeat..until">2.6.4. Г. Цикл <i>repeat..until</i></a></li>
+<li><a href="#д.-вывод-в-стиле-с">2.6.5. Д. Вывод «в стиле С++»</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-цели-работы" class="outline-2">
+<h2 id="цели-работы"><span class="section-number-2">1.</span> Цели работы</h2>
+<div class="outline-text-2" id="text-цели-работы">
+<p>
+На примере языка Scheme ознакомиться со средствами метапрограммирования
+(«код как данные», макросы) и подходами к оптимизации вычислений
+(мемоизация результатов вычислений, отложенные вычисления).
+</p>
+
+<p>
+В работе также предлагается разработать дополнительное средство отладки
+программ &#x2014; каркас для отладки с помощью утверждений. На этом примере
+предлагается ознакомится с типичным применением программирования с
+использованием продолжений.
+</p>
+</div>
+</div>
+
+<div id="outline-container-задания" class="outline-2">
+<h2 id="задания"><span class="section-number-2">2.</span> Задания</h2>
+<div class="outline-text-2" id="text-задания">
+</div>
+<div id="outline-container-продолжения." class="outline-3">
+<h3 id="продолжения."><span class="section-number-3">2.1.</span> 1. Продолжения.</h3>
+<div class="outline-text-3" id="text-продолжения.">
+<p>
+Утверждение (assertion) &#x2014; проверка на истинность некоторого условия,
+заданного программистом. По традиции осуществляется процедурой
+(функцией) с именем <code>assert</code>. Включается в код во время написания кода и
+отладки с целью установки ограничений на значения и выявления
+недопустимых значений. Если в процессе выполнения программы указанное
+условие нарушается, то программа завершается с выводом диагностического
+сообщения о том, какое условие было нарушено. Если условие соблюдено, то
+выполнение программы продолжается, никаких сообщений не выводится.
+</p>
+
+<p>
+Реализуйте каркас (фреймворк) для отладки с помощью утверждений. Пусть
+Ваш каркас перед использованием инициализируется вызовом
+<code>(use-assertions)</code>, а сами утверждения записываются в коде ниже в виде
+<code>(assert &lt;statement&gt;)</code>. Если условие не выполнено, происходит завершение
+работы программы без возникновения ошибки выполнения и вывод в консоль
+диагностического сообщения вида <code>FAILED: &lt;statement&gt;</code>. Пример использования
+каркаса:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span>use-assertions<span style="color: #51afef;">)</span> <span style="color: #5B6268;">; </span><span style="color: #5B6268;">&#1048;&#1085;&#1080;&#1094;&#1080;&#1072;&#1083;&#1080;&#1079;&#1072;&#1094;&#1080;&#1103; &#1074;&#1072;&#1096;&#1077;&#1075;&#1086; &#1082;&#1072;&#1088;&#1082;&#1072;&#1089;&#1072; &#1087;&#1077;&#1088;&#1077;&#1076; &#1080;&#1089;&#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1085;&#1080;&#1077;&#1084;</span>
+
+<span style="color: #5B6268;">; </span><span style="color: #5B6268;">&#1054;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085;&#1080;&#1077; &#1087;&#1088;&#1086;&#1094;&#1077;&#1076;&#1091;&#1088;&#1099;, &#1090;&#1088;&#1077;&#1073;&#1091;&#1102;&#1097;&#1077;&#1081; &#1074;&#1077;&#1088;&#1080;&#1092;&#1080;&#1082;&#1072;&#1094;&#1080;&#1080; &#1087;&#1077;&#1088;&#1077;&#1076;&#1072;&#1085;&#1085;&#1086;&#1075;&#1086; &#1077;&#1081; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1103;:</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">1/x</span> x<span style="color: #c678dd;">)</span>
+  <span style="color: #c678dd;">(</span>assert <span style="color: #98be65;">(</span>not <span style="color: #a9a1e1;">(</span>zero? x<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span> <span style="color: #5B6268;">; </span><span style="color: #5B6268;">&#1059;&#1090;&#1074;&#1077;&#1088;&#1078;&#1076;&#1077;&#1085;&#1080;&#1077;: x &#1044;&#1054;&#1051;&#1046;&#1045;&#1053; &#1041;&#1067;&#1058;&#1068; &#8800; 0</span>
+  <span style="color: #c678dd;">(</span>/ <span style="color: #da8548; font-weight: bold;">1</span> x<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #5B6268;">; </span><span style="color: #5B6268;">&#1055;&#1088;&#1080;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1077; &#1087;&#1088;&#1086;&#1094;&#1077;&#1076;&#1091;&#1088;&#1099; &#1089; &#1091;&#1090;&#1074;&#1077;&#1088;&#1078;&#1076;&#1077;&#1085;&#1080;&#1077;&#1084;:</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">map</span> 1/x '<span style="color: #c678dd;">(</span><span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">2</span> <span style="color: #da8548; font-weight: bold;">3</span> <span style="color: #da8548; font-weight: bold;">4</span> <span style="color: #da8548; font-weight: bold;">5</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span> <span style="color: #5B6268;">; </span><span style="color: #5B6268;">&#1042;&#1045;&#1056;&#1053;&#1045;&#1058; &#1089;&#1087;&#1080;&#1089;&#1086;&#1082; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1081; &#1074; &#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1091;</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">map</span> 1/x '<span style="color: #c678dd;">(</span><span style="color: #da8548; font-weight: bold;">-2</span> <span style="color: #da8548; font-weight: bold;">-1</span> <span style="color: #da8548; font-weight: bold;">0</span> <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">2</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span> <span style="color: #5B6268;">; </span><span style="color: #5B6268;">&#1042;&#1067;&#1042;&#1045;&#1044;&#1045;&#1058; &#1074; &#1082;&#1086;&#1085;&#1089;&#1086;&#1083;&#1100; &#1089;&#1086;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077; &#1080; &#1079;&#1072;&#1074;&#1077;&#1088;&#1096;&#1080;&#1090; &#1088;&#1072;&#1073;&#1086;&#1090;&#1091; &#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099;</span>
+</pre>
+</div>
+
+<p>
+Сообщение, которое должно быть выведено при выполнении примера,
+показанного выше:
+</p>
+
+<pre class="example" id="org65be105">
+FAILED: (not (zero? x))
+</pre>
+
+<p>
+Важно! Если в программе используются гигиенические макросы и эта
+программа будет выполнена в среде guile 1.8.x (в том числе на сервере
+тестирования), то следует подключить модуль поддержки таких макросов,
+написав в начале программы следующую строку:
+</p>
+
+<pre class="example" id="orge082932">
+  (use-syntax (ice-9 syncase))
+</pre>
+</div>
+<div id="outline-container-orgd8ccaee" class="outline-4">
+<h4 id="orgd8ccaee"><span class="section-number-4">2.1.1.</span> решение</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<div class="org-src-container">
+<pre class="src src-scheme">
+<span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">exit</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">(</span>display <span style="color: #98be65;">"please call (use-assertions) before using (assert ...)"</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">use-assertions</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">syntax-rules</span> <span style="color: #98be65;">()</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>use-assertions<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">call-with-current-continuation</span>
+       <span style="color: #51afef;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #c678dd;">(</span>cont<span style="color: #c678dd;">)</span>
+         <span style="color: #c678dd;">(</span><span style="color: #51afef;">set!</span> exit cont<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">assert</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">syntax-rules</span> <span style="color: #98be65;">()</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>assert expr<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">if</span> <span style="color: #51afef;">(</span>not expr<span style="color: #51afef;">)</span>
+         <span style="color: #51afef;">(</span><span style="color: #51afef;">begin</span>
+           <span style="color: #c678dd;">(</span>display <span style="color: #98be65;">"FAILED: "</span><span style="color: #c678dd;">)</span>
+           <span style="color: #c678dd;">(</span>write 'expr<span style="color: #c678dd;">)</span>
+           <span style="color: #c678dd;">(</span>newline<span style="color: #c678dd;">)</span>
+           <span style="color: #c678dd;">(</span>exit<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1de95e8" class="outline-4">
+<h4 id="org1de95e8"><span class="section-number-4">2.1.2.</span> тесты</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">1/x</span> x<span style="color: #c678dd;">)</span>
+  <span style="color: #c678dd;">(</span>assert <span style="color: #98be65;">(</span>not <span style="color: #a9a1e1;">(</span>zero? x<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span> <span style="color: #5B6268;">; </span><span style="color: #5B6268;">&#1059;&#1090;&#1074;&#1077;&#1088;&#1078;&#1076;&#1077;&#1085;&#1080;&#1077;: x &#1044;&#1054;&#1051;&#1046;&#1045;&#1053; &#1041;&#1067;&#1058;&#1068; &#8800; 0</span>
+  <span style="color: #c678dd;">(</span>/ <span style="color: #da8548; font-weight: bold;">1</span> x<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span>use-assertions<span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">map</span> 1/x '<span style="color: #c678dd;">(</span><span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">2</span> <span style="color: #da8548; font-weight: bold;">3</span> <span style="color: #da8548; font-weight: bold;">4</span> <span style="color: #da8548; font-weight: bold;">5</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span> <span style="color: #5B6268;">; </span><span style="color: #5B6268;">&#1042;&#1045;&#1056;&#1053;&#1045;&#1058; &#1089;&#1087;&#1080;&#1089;&#1086;&#1082; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1081; &#1074; &#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1091;</span>
+</pre>
+</div>
+
+<p>
+(1 1/2 1/3 1/4 1/5)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">map</span> 1/x '<span style="color: #c678dd;">(</span><span style="color: #da8548; font-weight: bold;">-2</span> <span style="color: #da8548; font-weight: bold;">-1</span> <span style="color: #da8548; font-weight: bold;">0</span> <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">2</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span> <span style="color: #5B6268;">; </span><span style="color: #5B6268;">&#1042;&#1067;&#1042;&#1045;&#1044;&#1045;&#1058; &#1074; &#1082;&#1086;&#1085;&#1089;&#1086;&#1083;&#1100; &#1089;&#1086;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077; &#1080; &#1079;&#1072;&#1074;&#1077;&#1088;&#1096;&#1080;&#1090; &#1088;&#1072;&#1073;&#1086;&#1090;&#1091; &#1087;&#1088;&#1086;&#1075;&#1088;&#1072;&#1084;&#1084;&#1099;</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-код-как-данные.-порты-ввода-вывода." class="outline-3">
+<h3 id="код-как-данные.-порты-ввода-вывода."><span class="section-number-3">2.2.</span> 2. Код как данные. Порты ввода-вывода.</h3>
+<div class="outline-text-3" id="text-код-как-данные.-порты-ввода-вывода.">
+<ul class="org-ul">
+<li><p>
+<i>Сериализация данных.</i> Реализуйте процедуры для записи данных из
+переменной в файл по заданному пути (т.е. для сериализации) и
+последующего чтения данных (десериализации) из такого файла:
+</p>
+
+<pre class="example" id="org0035615">
+(save-data данные путь-к-файлу)
+(load-data путь-к-файлу) ⇒ данные
+</pre>
+
+<ul class="org-ul">
+<li><p>
+решение
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">save-data</span> data path<span style="color: #c678dd;">)</span>
+<span style="color: #c678dd;">(</span><span style="color: #51afef;">with-output-to-file</span> path <span style="color: #98be65;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #a9a1e1;">()</span>
+                            <span style="color: #a9a1e1;">(</span>write data<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">load-data</span> path<span style="color: #c678dd;">)</span>
+<span style="color: #c678dd;">(</span><span style="color: #51afef;">with-input-from-file</span> path <span style="color: #98be65;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #a9a1e1;">()</span>
+                            <span style="color: #a9a1e1;">(</span>read<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div></li>
+</ul></li>
+<li><i>Подсчет строк в текстовом файле.</i> Реализуйте процедуру, принимающую в
+качестве аргумента путь к текстовому файлу и возвращающую число
+<i>непустых</i> строк в этом файле. Используйте процедуры, разработанные
+вами ранее в рамках выполнения домашних заданий.
+<ul class="org-ul">
+<li><p>
+решение
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">file-nonempty-lines-count</span> path<span style="color: #c678dd;">)</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">with-input-from-file</span> path <span style="color: #98be65;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #a9a1e1;">()</span>
+                               <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">loop</span> <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>prev #\newline<span style="color: #c678dd;">)</span>
+                                          <span style="color: #c678dd;">(</span>k <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+                                 <span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span>cur <span style="color: #a9a1e1;">(</span>read-char<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+                                   <span style="color: #c678dd;">(</span><span style="color: #51afef;">if</span> <span style="color: #98be65;">(</span>eof-object? cur<span style="color: #98be65;">)</span>
+                                       <span style="color: #98be65;">(</span><span style="color: #51afef;">if</span> <span style="color: #a9a1e1;">(</span>equal? #\newline prev<span style="color: #a9a1e1;">)</span>
+                                           k
+                                           <span style="color: #a9a1e1;">(</span>+ k <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+                                       <span style="color: #98be65;">(</span><span style="color: #51afef;">if</span> <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">and</span> <span style="color: #51afef;">(</span>equal? #\newline cur<span style="color: #51afef;">)</span>
+                                                <span style="color: #51afef;">(</span>not <span style="color: #c678dd;">(</span>equal? #\newline prev<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+                                           <span style="color: #a9a1e1;">(</span>loop cur <span style="color: #51afef;">(</span>+ k <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+                                           <span style="color: #a9a1e1;">(</span>loop cur k<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div></li>
+
+<li><p>
+тесты
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span>display <span style="color: #c678dd;">(</span>file-nonempty-lines-count <span style="color: #98be65;">"./lab4.org"</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+688
+</pre></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-мемоизация-результатов-вычислений." class="outline-3">
+<h3 id="мемоизация-результатов-вычислений."><span class="section-number-3">2.3.</span> 3. Мемоизация результатов вычислений.</h3>
+<div class="outline-text-3" id="text-мемоизация-результатов-вычислений.">
+<p>
+Реализуйте функцию вычисления n-го &ldquo;числа трибоначчи&rdquo;
+(последовательности чисел, которой первые три числа равны соответственно
+0, 0 и 1, а каждое последующее число &#x2014; сумме предыдущих трех чисел):
+</p>
+
+
+<div id="orgb244dc6" class="figure">
+<p><img src="lab3v2-trib.gif" alt="lab3v2-trib.gif" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Функция</p>
+</div>
+
+
+<div id="org6c4222d" class="figure">
+<p><img src="lab3v2-trib-domain.gif" alt="lab3v2-trib-domain.gif" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Область определения функции</p>
+</div>
+
+<p>
+Реализуйте версию этой функции с мемоизацией результатов вычислений.
+Сравните время вычисления значения функций для разных (умеренно больших)
+значений её аргументов без мемоизации и с мемоизацией. Для точного
+измерения вычисления рекомендуется использовать команду REPL Guile
+<code>time</code> (Guile 2.x).
+</p>
+</div>
+
+<div id="outline-container-orga2c0df8" class="outline-4">
+<h4 id="orga2c0df8"><span class="section-number-4">2.3.1.</span> Решение без мемоизации</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">tribonacci</span> n<span style="color: #c678dd;">)</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">cond</span> <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>= n <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>&lt;= n <span style="color: #da8548; font-weight: bold;">2</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span><span style="color: #51afef;">else</span> <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">loop</span> <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>n <span style="color: #98be65;">(</span>- n <span style="color: #da8548; font-weight: bold;">2</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+                         <span style="color: #c678dd;">(</span>first <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #c678dd;">)</span>
+                         <span style="color: #c678dd;">(</span>second <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #c678dd;">)</span>
+                         <span style="color: #c678dd;">(</span>third <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+                <span style="color: #51afef;">(</span><span style="color: #51afef;">if</span> <span style="color: #c678dd;">(</span>= n <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #c678dd;">)</span>
+                    third
+                    <span style="color: #c678dd;">(</span>loop <span style="color: #98be65;">(</span>- n <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #98be65;">)</span> second third <span style="color: #98be65;">(</span>+ first second third<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+<ol class="org-ol">
+<li><a id="orge695fd5"></a>Тесты<br />
+<div class="outline-text-5" id="text-2-3-1-1">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span>load <span style="color: #98be65;">"./unit-test.scm"</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">tests</span>
+  <span style="color: #c678dd;">(</span>list <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci <span style="color: #da8548; font-weight: bold;">2</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">2</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci <span style="color: #da8548; font-weight: bold;">4</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">4</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci <span style="color: #da8548; font-weight: bold;">4</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">4</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci <span style="color: #da8548; font-weight: bold;">5</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">7</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span>run-tests tests<span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span><span style="color: #51afef;">use-modules</span> <span style="color: #c678dd;">(</span>ice-9 time<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span>time <span style="color: #c678dd;">(</span>tribonacci <span style="color: #da8548; font-weight: bold;">9000</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span>time <span style="color: #c678dd;">(</span>tribonacci <span style="color: #da8548; font-weight: bold;">90000</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span>time <span style="color: #c678dd;">(</span>tribonacci <span style="color: #da8548; font-weight: bold;">90050</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<pre class="example" id="org5ea682d">
+Test 1: (tribonacci 0) ok
+Test 2: (tribonacci 1) ok
+Test 3: (tribonacci 2) ok
+Test 4: (tribonacci 3) ok
+Test 5: (tribonacci 4) ok
+Test 6: (tribonacci 4) ok
+Test 7: (tribonacci 5) ok
+clock utime stime cutime cstime gctime
+ 0.01  0.04  0.00   0.00   0.00   0.04
+clock utime stime cutime cstime gctime
+ 0.59  2.90  0.07   0.00   0.00   2.77
+clock utime stime cutime cstime gctime
+ 0.48  2.23  0.03   0.00   0.00   2.09
+</pre>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org3a9e9df" class="outline-4">
+<h4 id="org3a9e9df"><span class="section-number-4">2.3.2.</span> Решение с мемоизацией</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">tribonacci-memo</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">let</span> <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>known-results '<span style="color: #51afef;">()</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #a9a1e1;">(</span>n<span style="color: #a9a1e1;">)</span>
+      <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">let*</span> <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>args n<span style="color: #c678dd;">)</span>
+             <span style="color: #c678dd;">(</span>res <span style="color: #98be65;">(</span>assoc args known-results<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+        <span style="color: #51afef;">(</span><span style="color: #51afef;">if</span> res
+            <span style="color: #c678dd;">(</span>cadr res<span style="color: #c678dd;">)</span>
+            <span style="color: #c678dd;">(</span><span style="color: #51afef;">let</span> <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>res <span style="color: #51afef;">(</span><span style="color: #51afef;">cond</span> <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span>= n <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span> <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #c678dd;">)</span>
+                             <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span>&lt;= n <span style="color: #da8548; font-weight: bold;">2</span><span style="color: #98be65;">)</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #c678dd;">)</span>
+                             <span style="color: #c678dd;">(</span><span style="color: #51afef;">else</span> <span style="color: #98be65;">(</span>+ <span style="color: #a9a1e1;">(</span>tribonacci-memo <span style="color: #51afef;">(</span>- n <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+                                      <span style="color: #a9a1e1;">(</span>tribonacci-memo <span style="color: #51afef;">(</span>- n <span style="color: #da8548; font-weight: bold;">2</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+                                      <span style="color: #a9a1e1;">(</span>tribonacci-memo <span style="color: #51afef;">(</span>- n <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+              <span style="color: #98be65;">(</span><span style="color: #51afef;">set!</span> known-results <span style="color: #a9a1e1;">(</span>cons <span style="color: #51afef;">(</span>list args res<span style="color: #51afef;">)</span> known-results<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+              res<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+<ol class="org-ol">
+<li><a id="orgac7f513"></a>Тесты<br />
+<div class="outline-text-5" id="text-2-3-2-1">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span>load <span style="color: #98be65;">"./unit-test.scm"</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">tests</span>
+  <span style="color: #c678dd;">(</span>list <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci-memo <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci-memo <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci-memo <span style="color: #da8548; font-weight: bold;">2</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci-memo <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">2</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci-memo <span style="color: #da8548; font-weight: bold;">4</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">4</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci-memo <span style="color: #da8548; font-weight: bold;">4</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">4</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>tribonacci-memo <span style="color: #da8548; font-weight: bold;">5</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">7</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span>run-tests tests<span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span><span style="color: #51afef;">use-modules</span> <span style="color: #c678dd;">(</span>ice-9 time<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span>time <span style="color: #c678dd;">(</span>tribonacci-memo <span style="color: #da8548; font-weight: bold;">9000</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span>time <span style="color: #c678dd;">(</span>tribonacci-memo <span style="color: #da8548; font-weight: bold;">90000</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span>time <span style="color: #c678dd;">(</span>tribonacci-memo <span style="color: #da8548; font-weight: bold;">90050</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<pre class="example" id="orgcd7890f">
+Test 1: (tribonacci-memo 0) ok
+Test 2: (tribonacci-memo 1) ok
+Test 3: (tribonacci-memo 2) ok
+Test 4: (tribonacci-memo 3) ok
+Test 5: (tribonacci-memo 4) ok
+Test 6: (tribonacci-memo 4) ok
+Test 7: (tribonacci-memo 5) ok
+clock utime stime cutime cstime gctime
+ 0.06  0.05  0.00   0.00   0.00   0.00
+clock utime stime cutime cstime gctime
+ 7.29  7.71  0.09   0.00   0.00   0.83
+clock utime stime cutime cstime gctime
+ 0.02  0.01  0.00   0.00   0.00   0.00
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-отложенные-вычисления." class="outline-3">
+<h3 id="отложенные-вычисления."><span class="section-number-3">2.4.</span> 4. Отложенные вычисления.</h3>
+<div class="outline-text-3" id="text-отложенные-вычисления.">
+<p>
+Используя примитивы для отложенных вычислений <code>delay</code> и <code>force</code>,
+реализуйте макрос <code>my-if</code>, который полностью воспроизводит поведение
+встроенной условной конструкции (специальной формы) <code>if</code> для выражений,
+возвращающих значения. Например, такие примеры должны вычисляться
+корректно:
+</p>
+
+<pre class="example" id="orga4872ce">
+  (my-if #t 1 (/ 1 0)) ⇒ 1
+  (my-if #f (/ 1 0) 1) ⇒ 1
+</pre>
+
+<p>
+<i>Запрещается</i> использовать встроенные условные конструкции <code>if</code>, <code>cond</code>,
+<code>case</code> и перехват исключений.
+</p>
+</div>
+
+<div id="outline-container-org191ae04" class="outline-4">
+<h4 id="org191ae04"><span class="section-number-4">2.4.1.</span> Решение</h4>
+<div class="outline-text-4" id="text-2-4-1">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">my-if</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">syntax-rules</span> <span style="color: #98be65;">()</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>my-if condition statement1 statement2<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">let</span> <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>promise1 <span style="color: #98be65;">(</span><span style="color: #51afef;">delay</span> statement1<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+           <span style="color: #c678dd;">(</span>promise2 <span style="color: #98be65;">(</span><span style="color: #51afef;">delay</span> statement2<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+       <span style="color: #51afef;">(</span><span style="color: #51afef;">force</span> <span style="color: #c678dd;">(</span><span style="color: #51afef;">or</span> <span style="color: #98be65;">(</span><span style="color: #51afef;">and</span> condition promise1<span style="color: #98be65;">)</span> promise2<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3b44654" class="outline-4">
+<h4 id="org3b44654"><span class="section-number-4">2.4.2.</span> Тесты</h4>
+<div class="outline-text-4" id="text-2-4-2">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span>load <span style="color: #98be65;">"./unit-test.scm"</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">tests</span>
+  <span style="color: #c678dd;">(</span>list <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>my-if #t <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #51afef;">(</span>/ <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>my-if #f <span style="color: #51afef;">(</span>/ <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #51afef;">)</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>my-if <span style="color: #51afef;">(</span>= <span style="color: #c678dd;">(</span>+ <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #c678dd;">)</span> <span style="color: #da8548; font-weight: bold;">2</span><span style="color: #51afef;">)</span> <span style="color: #da8548; font-weight: bold;">2</span> <span style="color: #51afef;">(</span>/ <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">2</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span>run-tests tests<span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+Test 1: (my-if #t 1 (/ 1 0)) ok
+Test 2: (my-if #f (/ 1 0) 1) ok
+Test 3: (my-if (= (+ 1 1) 2) 2 (/ 1 0)) ok
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-локальные-определения." class="outline-3">
+<h3 id="локальные-определения."><span class="section-number-3">2.5.</span> 5. Локальные определения.</h3>
+<div class="outline-text-3" id="text-локальные-определения.">
+<p>
+Реализуйте макросы <code>my-let</code> и <code>my-let*</code>, полностью воспроизводящие
+поведение встроенных макросов <code>let</code> и <code>let*</code>.
+</p>
+</div>
+<div id="outline-container-org0b6ec86" class="outline-4">
+<h4 id="org0b6ec86"><span class="section-number-4">2.5.1.</span> Решение</h4>
+<div class="outline-text-4" id="text-2-5-1">
+</div>
+<ol class="org-ol">
+<li><a id="orge5fa4d4"></a>let<br />
+<div class="outline-text-5" id="text-2-5-1-1">
+<p>
+первое приближение:
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">my-let</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">syntax-rules</span> <span style="color: #98be65;">()</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>my-let <span style="color: #51afef;">()</span>
+             expr<span style="color: #a9a1e1;">)</span>
+     expr<span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>my-let <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>var1 expr1<span style="color: #c678dd;">)</span> <span style="color: #c678dd;">(</span>varn exprn<span style="color: #c678dd;">)</span> ...<span style="color: #51afef;">)</span>
+             expr<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #c678dd;">(</span>var1<span style="color: #c678dd;">)</span>
+        <span style="color: #c678dd;">(</span>my-let <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>varn exprn<span style="color: #a9a1e1;">)</span> ...<span style="color: #98be65;">)</span>
+                expr<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+      expr1<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+<p>
+второе приближение:
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">my-let</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">syntax-rules</span> <span style="color: #98be65;">()</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>my-let <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>var val<span style="color: #c678dd;">)</span> ...<span style="color: #51afef;">)</span>
+             expr<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #c678dd;">(</span>var ...<span style="color: #c678dd;">)</span>
+        expr<span style="color: #51afef;">)</span>
+      val ...<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org0b8272b"></a>let*<br />
+<div class="outline-text-5" id="text-2-5-1-2">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">my-let*</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">syntax-rules</span> <span style="color: #98be65;">()</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>my-let* <span style="color: #51afef;">()</span>
+             expr<span style="color: #a9a1e1;">)</span>
+     expr<span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>my-let* <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>var1 expr1<span style="color: #c678dd;">)</span> <span style="color: #c678dd;">(</span>varn exprn<span style="color: #c678dd;">)</span> ...<span style="color: #51afef;">)</span>
+             expr<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #c678dd;">(</span>var1<span style="color: #c678dd;">)</span>
+        <span style="color: #c678dd;">(</span>my-let* <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>varn exprn<span style="color: #a9a1e1;">)</span> ...<span style="color: #98be65;">)</span>
+                expr<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+      expr1<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgf24a134" class="outline-4">
+<h4 id="orgf24a134"><span class="section-number-4">2.5.2.</span> Тесты</h4>
+<div class="outline-text-4" id="text-2-5-2">
+</div>
+<ol class="org-ol">
+<li><a id="org06abcd4"></a>let<br />
+<div class="outline-text-5" id="text-2-5-2-1">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">tests</span>
+  <span style="color: #c678dd;">(</span>list
+   <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>my-let <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>x <span style="color: #da8548; font-weight: bold;">5</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">(</span>y <span style="color: #da8548; font-weight: bold;">7</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+                 <span style="color: #51afef;">(</span>+ x <span style="color: #da8548; font-weight: bold;">1</span> y<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+         <span style="color: #da8548; font-weight: bold;">13</span><span style="color: #98be65;">)</span>
+   <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>my-let <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>=&gt; #f<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+           <span style="color: #51afef;">(</span><span style="color: #51afef;">cond</span> <span style="color: #c678dd;">(</span>#t =&gt; 'ok<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+         ok<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span>run-tests tests<span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+Test 1: (my-let ((x 5) (y 7)) (+ x 1 y)) ok
+Test 2: (my-let ((=&gt; #f)) (cond (#t =&gt; (quote ok)))) ok
+</pre>
+</div>
+</li>
+<li><a id="orgc28b91b"></a>let*<br />
+<div class="outline-text-5" id="text-2-5-2-2">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">tests</span>
+  <span style="color: #c678dd;">(</span>list
+   <span style="color: #98be65;">(</span>test <span style="color: #a9a1e1;">(</span>my-let* <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>x <span style="color: #da8548; font-weight: bold;">5</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">(</span>y <span style="color: #98be65;">(</span>+ x <span style="color: #da8548; font-weight: bold;">7</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+                  y<span style="color: #a9a1e1;">)</span> <span style="color: #da8548; font-weight: bold;">12</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span>run-tests tests<span style="color: #51afef;">)</span>
+</pre>
+</div>
+<pre class="example">
+Test 1: (my-let* ((x 5) (y (+ x 7))) y) ok
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-управляющие-конструкции." class="outline-3">
+<h3 id="управляющие-конструкции."><span class="section-number-3">2.6.</span> 6. Управляющие конструкции.</h3>
+<div class="outline-text-3" id="text-управляющие-конструкции.">
+<p>
+Используя <i>гигиенические</i> макросы языка Scheme, реализуйте управляющие
+конструкции, свойственные императивным языкам программирования.
+</p>
+</div>
+
+<div id="outline-container-а.-условия-when-и-unless" class="outline-4">
+<h4 id="а.-условия-when-и-unless"><span class="section-number-4">2.6.1.</span> А. Условия <i>when</i> и <i>unless</i></h4>
+<div class="outline-text-4" id="text-а.-условия-when-и-unless">
+<p>
+Напишите макросы:
+</p>
+
+<ul class="org-ul">
+<li><i>(when cond? expr1 expr2 &#x2026; exprn)</i>, который <i>выполняет</i>
+последовательность выражений <i>expr1 expr2 &#x2026; exprn</i>, если условие
+<i>cond?</i> истинно.</li>
+<li><i>(unless cond? expr1 expr2 &#x2026; exprn)</i>, который <i>выполняет</i>
+последовательность выражений <i>expr1 expr2 &#x2026; exprn</i>, если условие
+<i>cond?</i> ложно.</li>
+</ul>
+
+<p>
+Предполагается, что <i>when</i> и <i>unless</i> возвращают результат последнего
+вычисленного в них выражения. <i>When</i> и <i>unless</i> могут быть вложенными.
+</p>
+
+<p>
+Пример:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">  <span style="color: #5B6268;">; </span><span style="color: #5B6268;">&#1055;&#1091;&#1089;&#1090;&#1100; x = 1</span>
+  <span style="color: #5B6268;">;</span>
+  <span style="color: #51afef;">(</span><span style="color: #51afef;">when</span>   <span style="color: #c678dd;">(</span>&gt; x <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">(</span>display <span style="color: #98be65;">"x &gt; 0"</span><span style="color: #c678dd;">)</span>  <span style="color: #c678dd;">(</span>newline<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+  <span style="color: #51afef;">(</span><span style="color: #51afef;">unless</span> <span style="color: #c678dd;">(</span>= x <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">(</span>display <span style="color: #98be65;">"x != 0"</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">(</span>newline<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<p>
+В стандартный поток будет выведено:
+</p>
+
+<pre class="example" id="org9e7b1e3">
+  x &gt; 0
+  x != 0
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><a id="org6775e60"></a>Решение<br />
+<div class="outline-text-5" id="text-2-6-1-1">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">when</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">syntax-rules</span> <span style="color: #98be65;">()</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span><span style="color: #51afef;">when</span> test expr ...<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">if</span> test
+         <span style="color: #51afef;">(</span><span style="color: #51afef;">begin</span> expr ...<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">unless</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">syntax-rules</span> <span style="color: #98be65;">()</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span><span style="color: #51afef;">unless</span> test expr ...<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">if</span> <span style="color: #51afef;">(</span>not test<span style="color: #51afef;">)</span>
+         <span style="color: #51afef;">(</span><span style="color: #51afef;">begin</span> expr ...<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orgf8e3a3d"></a>Тесты<br />
+<div class="outline-text-5" id="text-2-6-1-2">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">x</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span><span style="color: #51afef;">when</span>   <span style="color: #c678dd;">(</span>&gt; x <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">(</span>display <span style="color: #98be65;">"x &gt; 0"</span><span style="color: #c678dd;">)</span>  <span style="color: #c678dd;">(</span>newline<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span><span style="color: #51afef;">unless</span> <span style="color: #c678dd;">(</span>= x <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">(</span>display <span style="color: #98be65;">"x != 0"</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">(</span>newline<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+x &gt; 0
+x != 0
+</pre>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-б.-циклы-for" class="outline-4">
+<h4 id="б.-циклы-for"><span class="section-number-4">2.6.2.</span> Б. Циклы <i>for</i></h4>
+<div class="outline-text-4" id="text-б.-циклы-for">
+<p>
+Реализуйте макрос <i>for</i>, который позволит организовывать циклы с
+переменной &#x2014; параметром цикла. Определение должно допускать две
+различных формы записи:
+</p>
+
+<ul class="org-ul">
+<li><i>(for x in xs expr1 expr2 &#x2026; exprn)</i> и</li>
+<li><i>(for xs as x expr1 expr2 &#x2026; exprn),</i></li>
+</ul>
+
+<p>
+где <i>x</i> &#x2014; переменная, <i>xs</i> &#x2014; список значений, которые должна
+принимать, переменная на каждой итерации, <i>expr1 expr2 &#x2026; exprn</i> &#x2014;
+последовательность инструкций, которые должны быть выполнены в теле
+цикла.
+</p>
+
+<p>
+Примеры применения:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">  <span style="color: #51afef;">(</span>for i in '<span style="color: #c678dd;">(</span><span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">2</span> <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #c678dd;">)</span>
+    <span style="color: #c678dd;">(</span>for j in '<span style="color: #98be65;">(</span><span style="color: #da8548; font-weight: bold;">4</span> <span style="color: #da8548; font-weight: bold;">5</span> <span style="color: #da8548; font-weight: bold;">6</span><span style="color: #98be65;">)</span>
+      <span style="color: #98be65;">(</span>display <span style="color: #a9a1e1;">(</span>list i j<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+      <span style="color: #98be65;">(</span>newline<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+  <span style="color: #51afef;">(</span>for '<span style="color: #c678dd;">(</span><span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">2</span> <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #c678dd;">)</span> as i
+    <span style="color: #c678dd;">(</span>for '<span style="color: #98be65;">(</span><span style="color: #da8548; font-weight: bold;">4</span> <span style="color: #da8548; font-weight: bold;">5</span> <span style="color: #da8548; font-weight: bold;">6</span><span style="color: #98be65;">)</span> as j
+      <span style="color: #98be65;">(</span>display <span style="color: #a9a1e1;">(</span>list i j<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+      <span style="color: #98be65;">(</span>newline<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+<ol class="org-ol">
+<li><a id="orgb95b718"></a>Решение<br />
+<div class="outline-text-5" id="text-2-6-2-1">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">for</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">syntax-rules</span> <span style="color: #98be65;">(</span>in as<span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>for x in xs expr ...<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">loop</span> <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>values xs<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+       <span style="color: #51afef;">(</span><span style="color: #51afef;">if</span> <span style="color: #c678dd;">(</span>not <span style="color: #98be65;">(</span>null? values<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+           <span style="color: #c678dd;">(</span><span style="color: #51afef;">let</span> <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>x <span style="color: #51afef;">(</span>car values<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+             <span style="color: #98be65;">(</span><span style="color: #51afef;">begin</span> expr ...<span style="color: #98be65;">)</span>
+             <span style="color: #98be65;">(</span>loop <span style="color: #a9a1e1;">(</span>cdr values<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>for xs as x expr ...<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span>for x in xs expr ...<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org449a2ae"></a>Тесты<br />
+<div class="outline-text-5" id="text-2-6-2-2">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span>for i in '<span style="color: #c678dd;">(</span><span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">2</span> <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #c678dd;">)</span>
+<span style="color: #c678dd;">(</span>for j in '<span style="color: #98be65;">(</span><span style="color: #da8548; font-weight: bold;">4</span> <span style="color: #da8548; font-weight: bold;">5</span> <span style="color: #da8548; font-weight: bold;">6</span><span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span>display <span style="color: #a9a1e1;">(</span>list i j<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span>newline<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span>for '<span style="color: #c678dd;">(</span><span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">2</span> <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #c678dd;">)</span> as i
+<span style="color: #c678dd;">(</span>for '<span style="color: #98be65;">(</span><span style="color: #da8548; font-weight: bold;">4</span> <span style="color: #da8548; font-weight: bold;">5</span> <span style="color: #da8548; font-weight: bold;">6</span><span style="color: #98be65;">)</span> as j
+    <span style="color: #98be65;">(</span>display <span style="color: #a9a1e1;">(</span>list i j<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span>newline<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<pre class="example" id="orgb5b9e90">
+(1 4)
+(1 5)
+(1 6)
+(2 4)
+(2 5)
+(2 6)
+(3 4)
+(3 5)
+(3 6)
+(1 4)
+(1 5)
+(1 6)
+(2 4)
+(2 5)
+(2 6)
+(3 4)
+(3 5)
+(3 6)
+</pre>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-в.-цикл-while" class="outline-4">
+<h4 id="в.-цикл-while"><span class="section-number-4">2.6.3.</span> В. Цикл <i>while</i></h4>
+<div class="outline-text-4" id="text-в.-цикл-while">
+<p>
+Реализуйте макрос <i>while</i>, который позволит организовывать циклы с
+предусловием:
+</p>
+
+<p>
+<i>(while cond? expr1 expr2 &#x2026; exprn)</i>,
+</p>
+
+<p>
+где <i>cond?</i> &#x2014; условие, <i>expr1 expr2 &#x2026; exprn</i> &#x2014; последовательность
+инструкций, которые должны быть выполнены в теле цикла. Проверка условия
+осуществляется перед каждой итерацией, тело цикла выполняется, если
+условие выполняется. Если при входе в цикл условие не выполняется, то
+тело цикла не будет выполнено ни разу.
+</p>
+
+<p>
+Пример применения:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">  <span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span>p <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>q <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+    <span style="color: #c678dd;">(</span>while <span style="color: #98be65;">(</span>&lt; p <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #98be65;">)</span>
+           <span style="color: #98be65;">(</span><span style="color: #51afef;">set!</span> q <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
+           <span style="color: #98be65;">(</span>while <span style="color: #a9a1e1;">(</span>&lt; q <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #a9a1e1;">)</span>
+                  <span style="color: #a9a1e1;">(</span>display <span style="color: #51afef;">(</span>list p q<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+                  <span style="color: #a9a1e1;">(</span>newline<span style="color: #a9a1e1;">)</span>
+                  <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">set!</span> q <span style="color: #51afef;">(</span>+ q <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+           <span style="color: #98be65;">(</span><span style="color: #51afef;">set!</span> p <span style="color: #a9a1e1;">(</span>+ p <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<p>
+Выведет:
+</p>
+
+<pre class="example" id="orgd41c28a">
+  (0 0)
+  (0 1)
+  (0 2)
+  (1 0)
+  (1 1)
+  (1 2)
+  (2 0)
+  (2 1)
+  (2 2)
+</pre>
+
+<p>
+<i>Рекомендация.</i> Целесообразно разворачивать макрос в вызов анонимной
+процедуры без аргументов со статической переменной, содержащей анонимную
+процедуру с проверкой условия, рекурсивным вызовом и телом цикла. Для
+краткой записи такой процедуры и ее вызова можно использовать встроенную
+конструкцию <i>letrec</i>, которая аналогична <i>let</i> и <span class="underline">let*</span>, но допускает
+рекурсивные определения, например:
+</p>
+
+<pre class="example" id="orgc32a139">
+  (letrec ((iter (lambda (i)
+                   (if (= i 10)
+                       '()
+                       (cons i (iter (+ i 1)))))))
+    (iter 0))
+    =&gt; (0 1 2 3 4 5 6 7 8 9)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgd478627"></a>Решение<br />
+<div class="outline-text-5" id="text-2-6-3-1">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">while</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">syntax-rules</span> <span style="color: #98be65;">()</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>while cond? expr ...<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">loop</span> <span style="color: #51afef;">()</span>
+       <span style="color: #51afef;">(</span><span style="color: #51afef;">if</span> cond?
+           <span style="color: #c678dd;">(</span><span style="color: #51afef;">begin</span> expr ...
+                  <span style="color: #98be65;">(</span>loop<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org3350c24"></a>Тесты<br />
+<div class="outline-text-5" id="text-2-6-3-2">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span>p <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
+      <span style="color: #98be65;">(</span>q <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+  <span style="color: #c678dd;">(</span>while <span style="color: #98be65;">(</span>&lt; p <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #51afef;">set!</span> q <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span>while <span style="color: #a9a1e1;">(</span>&lt; q <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #a9a1e1;">)</span>
+      <span style="color: #a9a1e1;">(</span>display <span style="color: #51afef;">(</span>list p q<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+      <span style="color: #a9a1e1;">(</span>newline<span style="color: #a9a1e1;">)</span>
+      <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">set!</span> q <span style="color: #51afef;">(</span>+ q <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #51afef;">set!</span> p <span style="color: #a9a1e1;">(</span>+ p <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+(0 0)
+(0 1)
+(0 2)
+(1 0)
+(1 1)
+(1 2)
+(2 0)
+(2 1)
+(2 2)
+</pre>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-г.-цикл-repeat..until" class="outline-4">
+<h4 id="г.-цикл-repeat..until"><span class="section-number-4">2.6.4.</span> Г. Цикл <i>repeat..until</i></h4>
+<div class="outline-text-4" id="text-г.-цикл-repeat..until">
+<p>
+Реализуйте макрос <i>repeat..until</i>, который позволит организовывать циклы
+с предусловием:
+</p>
+
+<p>
+<i>(repeat (expr1 expr2 &#x2026; exprn) until cond?)</i>,
+</p>
+
+<p>
+где <i>cond?</i> &#x2014; условие, <i>expr1 expr2 &#x2026; exprn</i> &#x2014; последовательность
+инструкций, которые должны быть выполнены в теле цикла. Проверка условия
+осуществляется после каждой итерации. Если условие возвращает истину,
+цикл завершается, иначе цикл выполняется снова. Таким образом, тело
+цикла выполняется по меньшей мере 1 раз.
+</p>
+
+<p>
+Например:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">  <span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span>i <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
+        <span style="color: #98be65;">(</span>j <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+    <span style="color: #c678dd;">(</span>repeat <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span><span style="color: #51afef;">set!</span> j <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #a9a1e1;">)</span>
+             <span style="color: #a9a1e1;">(</span>repeat <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>display <span style="color: #98be65;">(</span>list i j<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+                      <span style="color: #c678dd;">(</span><span style="color: #51afef;">set!</span> j <span style="color: #98be65;">(</span>+ j <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+                     until <span style="color: #51afef;">(</span>= j <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+             <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">set!</span> i <span style="color: #51afef;">(</span>+ i <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+             <span style="color: #a9a1e1;">(</span>newline<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+            until <span style="color: #98be65;">(</span>= i <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<p>
+Выведет:
+</p>
+
+<pre class="example" id="org6560127">
+  (0 0)(0 1)(0 2)
+  (1 0)(1 1)(1 2)
+  (2 0)(2 1)(2 2)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><a id="org1f5f2b4"></a>Решение<br />
+<div class="outline-text-5" id="text-2-6-4-1">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">repeat</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">syntax-rules</span> <span style="color: #98be65;">(</span>until<span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>repeat <span style="color: #51afef;">(</span>expr ...<span style="color: #51afef;">)</span> until cond?<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">loop</span> <span style="color: #51afef;">()</span>
+       <span style="color: #51afef;">(</span><span style="color: #51afef;">begin</span> expr ...
+              <span style="color: #c678dd;">(</span><span style="color: #51afef;">if</span> <span style="color: #98be65;">(</span>not cond?<span style="color: #98be65;">)</span> <span style="color: #98be65;">(</span>loop<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org203bd6a"></a>Тесты<br />
+<div class="outline-text-5" id="text-2-6-4-2">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span>i <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
+      <span style="color: #98be65;">(</span>j <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+  <span style="color: #c678dd;">(</span>repeat <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span><span style="color: #51afef;">set!</span> j <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #a9a1e1;">)</span>
+           <span style="color: #a9a1e1;">(</span>repeat <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>display <span style="color: #98be65;">(</span>list i j<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+                    <span style="color: #c678dd;">(</span><span style="color: #51afef;">set!</span> j <span style="color: #98be65;">(</span>+ j <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+                   until <span style="color: #51afef;">(</span>= j <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+           <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">set!</span> i <span style="color: #51afef;">(</span>+ i <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+           <span style="color: #a9a1e1;">(</span>newline<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+          until <span style="color: #98be65;">(</span>= i <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+(0 0)(0 1)(0 2)
+(1 0)(1 1)(1 2)
+(2 0)(2 1)(2 2)
+</pre>
+</div>
+</li>
+
+<li><a id="orgb49a81b"></a>Без тела цикла в скобках<br />
+<div class="outline-text-5" id="text-2-6-4-3">
+<p>
+Подумайте, зачем требуется заключать тело цикла в круглые скобки? Как
+изменится макрос, если отказаться от этих скобок?
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">repeat</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">syntax-rules</span> <span style="color: #98be65;">(</span>until<span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>repeat expr ... until cond?<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">loop</span> <span style="color: #51afef;">()</span>
+       <span style="color: #51afef;">(</span><span style="color: #51afef;">begin</span> expr ...
+              <span style="color: #c678dd;">(</span><span style="color: #51afef;">if</span> <span style="color: #98be65;">(</span>not cond?<span style="color: #98be65;">)</span> <span style="color: #98be65;">(</span>loop<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span>i <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
+      <span style="color: #98be65;">(</span>j <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+  <span style="color: #c678dd;">(</span>repeat <span style="color: #98be65;">(</span><span style="color: #51afef;">set!</span> j <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
+           <span style="color: #98be65;">(</span>repeat <span style="color: #a9a1e1;">(</span>display <span style="color: #51afef;">(</span>list i j<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+                    <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">set!</span> j <span style="color: #51afef;">(</span>+ j <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+                   until <span style="color: #a9a1e1;">(</span>= j <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+           <span style="color: #98be65;">(</span><span style="color: #51afef;">set!</span> i <span style="color: #a9a1e1;">(</span>+ i <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+           <span style="color: #98be65;">(</span>newline<span style="color: #98be65;">)</span>
+          until <span style="color: #98be65;">(</span>= i <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+(0 0)(0 1)(0 2)
+(1 0)(1 1)(1 2)
+(2 0)(2 1)(2 2)
+</pre>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-д.-вывод-в-стиле-с" class="outline-4">
+<h4 id="д.-вывод-в-стиле-с"><span class="section-number-4">2.6.5.</span> Д. Вывод «в стиле С++»</h4>
+<div class="outline-text-4" id="text-д.-вывод-в-стиле-с">
+<p>
+Реализуйте макрос для последовательного вывода значений в стандартный
+поток вывода вида:
+</p>
+
+<pre class="example" id="orgbb70d1f">
+  (cout &lt;&lt; "a = " &lt;&lt; 1 &lt;&lt; endl &lt;&lt; "b = " &lt;&lt; 2 &lt;&lt; endl)
+</pre>
+
+<p>
+Здесь <i>cout</i> &#x2014; имя макроса, указывающее, что будет осуществляться
+вывод в консоль (от console output), символы <i>&lt;&lt;</i> разделяют значения,
+<i>endl</i> означает переход на новую строку.
+</p>
+
+<p>
+Данный пример выведет следующий текст:
+</p>
+
+<pre class="example" id="org01235e0">
+  a = 1
+  b = 2
+</pre>
+</div>
+<ol class="org-ol">
+<li><a id="org109a644"></a>Решение<br />
+<div class="outline-text-5" id="text-2-6-5-1">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">cout</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">syntax-rules</span> <span style="color: #98be65;">(</span>&lt;&lt; endl<span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>cout &lt;&lt; endl<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span>newline<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>cout &lt;&lt; elem<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span>display elem<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>cout &lt;&lt; endl others ...<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">begin</span> <span style="color: #51afef;">(</span>newline<span style="color: #51afef;">)</span>
+            <span style="color: #51afef;">(</span>cout others ...<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>cout &lt;&lt; elem others ...<span style="color: #a9a1e1;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">begin</span> <span style="color: #51afef;">(</span>display elem<span style="color: #51afef;">)</span>
+            <span style="color: #51afef;">(</span>cout others ...<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org952b421"></a>Тесты<br />
+<div class="outline-text-5" id="text-2-6-5-2">
+<div class="org-src-container">
+<pre class="src src-scheme"><span style="color: #51afef;">(</span>cout &lt;&lt; <span style="color: #98be65;">"a = "</span> &lt;&lt; <span style="color: #da8548; font-weight: bold;">1</span> &lt;&lt; endl &lt;&lt; <span style="color: #98be65;">"b = "</span> &lt;&lt; <span style="color: #da8548; font-weight: bold;">2</span> &lt;&lt; endl<span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+a = 1
+b = 2
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Starovoytov Alexandr</p>
+<p class="date">Created: 2021-11-28 Sun 23:00</p>
+</div>
+</body>
+</html>
