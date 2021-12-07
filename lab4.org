@@ -143,7 +143,7 @@ FAILED: (not (zero? x))
   вами ранее в рамках выполнения домашних заданий.
   - решение
     #+begin_src scheme :results none
-(define (file-nonempty-lines-count path)
+(define (file-nonempty-lines-count-old path)
   (with-input-from-file path (lambda ()
                                (let loop ((prev #\newline)
                                           (k 0))
@@ -156,15 +156,29 @@ FAILED: (not (zero? x))
                                                 (not (equal? #\newline prev)))
                                            (loop cur (+ k 1))
                                            (loop cur k))))))))
+(define (file-nonempty-lines-count file)
+  (with-input-from-file file (lambda ()
+                               (let loop ((k 0))
+                                 (let ((cur (read-char)))
+                                   (cond ((eof-object? cur)
+                                          k)
+                                         ((and (not (equal? cur #\newline))
+                                               (or (eof-object? (peek-char))
+                                                   (equal? (peek-char) #\newline)))
+                                          (loop (+ k 1)))
+                                         (else (loop k))))))))
     #+end_src
 
   - тесты
     #+begin_src scheme :exports both
+(display (file-nonempty-lines-count-old "./lab4.org"))
+(newline)
 (display (file-nonempty-lines-count "./lab4.org"))
     #+end_src
 
     #+RESULTS:
-    : 458
+    : 702
+    : 702
 
 ** 3. Мемоизация результатов вычислений.
     :PROPERTIES:
