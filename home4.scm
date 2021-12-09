@@ -195,21 +195,6 @@
 (display (perim c))
 (newline)
 
-(((call-with-current-continuation
-   (lambda (c) c))
-  (lambda (x) x))
- 'hello)
-
-((<продолжение> (lambda (x) x))
- 'hello)
-
-(((lambda (x) x) (lambda (x) x))
- 'hello)
-
-((lambda (x) x) 'hello)
-
-'hello
-
 (define-syntax my-let
   (syntax-rules ()
     ((_ ((var val)) expr)
@@ -249,16 +234,3 @@
                   y) 12)))
 
 (run-tests tests)
-
-(define r #f)
-
-(define (g x)
-  (set! x (+
-           x ;; x из первого вызова g, т.к. будет сохранено в стеке
-           (call-with-current-continuation
-            (lambda (ret)
-              (set! r ret)
-              0))
-           x ;; x из последнего вызова, т.к. set! изменит переменную сохраненную в континуации
-           ))
-  x)

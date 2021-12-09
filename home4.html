@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-12-10 Fri 00:29 -->
+<!-- 2021-12-10 Fri 00:33 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Домашнее задание №4</title>
@@ -203,27 +203,27 @@
 <ul>
 <li><a href="#мемоизация">1. 1. Мемоизация</a>
 <ul>
-<li><a href="#org91e9470">1.1. Решение</a></li>
-<li><a href="#org408faf4">1.2. Тесты</a></li>
+<li><a href="#org263335e">1.1. Решение</a></li>
+<li><a href="#org3549189">1.2. Тесты</a></li>
 </ul>
 </li>
 <li><a href="#отложенные-вычисления">2. 2. Отложенные вычисления</a></li>
 <li><a href="#чтение-из-потока">3. 3. Чтение из потока</a>
 <ul>
-<li><a href="#orgc9f8142">3.1. Решение</a></li>
-<li><a href="#org2231af5">3.2. Тесты</a></li>
+<li><a href="#org93d9122">3.1. Решение</a></li>
+<li><a href="#org3e8c231">3.2. Тесты</a></li>
 </ul>
 </li>
 <li><a href="#структуры-записи">4. 4. Структуры (записи)</a>
 <ul>
-<li><a href="#org0b7f259">4.1. Решение</a></li>
-<li><a href="#org86392b2">4.2. Тесты</a></li>
+<li><a href="#orge07b145">4.1. Решение</a></li>
+<li><a href="#org8bc108e">4.2. Тесты</a></li>
 </ul>
 </li>
 <li><a href="#алгебраические-типы-данных">5. 5. Алгебраические типы данных</a>
 <ul>
-<li><a href="#org732ffda">5.1. Решение</a></li>
-<li><a href="#orgf7f8941">5.2. Тесты</a></li>
+<li><a href="#org8e0d02a">5.1. Решение</a></li>
+<li><a href="#org8823312">5.2. Тесты</a></li>
 </ul>
 </li>
 <li><a href="#ачивки">6. «Ачивки»</a></li>
@@ -245,7 +245,7 @@
 написав в начале программы следующую строку:
 </p>
 
-<pre class="example" id="org24f57c8">
+<pre class="example" id="orgfffe919">
   (use-syntax (ice-9 syncase))
 </pre>
 
@@ -261,7 +261,7 @@
 Примеры вызова процедур сервером тестирования:
 </p>
 
-<pre class="example" id="orgfac9414">
+<pre class="example" id="org659a0ba">
   (begin
     (display (memoized-factorial 10)) (newline)
     (display (memoized-factorial 50)) (newline))
@@ -270,8 +270,8 @@
   30414093201713378043612608166064768844377641568960512000000000000
 </pre>
 </div>
-<div id="outline-container-org91e9470" class="outline-3">
-<h3 id="org91e9470"><span class="section-number-3">1.1.</span> Решение</h3>
+<div id="outline-container-org263335e" class="outline-3">
+<h3 id="org263335e"><span class="section-number-3">1.1.</span> Решение</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">memoized-factorial</span>
@@ -286,8 +286,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org408faf4" class="outline-3">
-<h3 id="org408faf4"><span class="section-number-3">1.2.</span> Тесты</h3>
+<div id="outline-container-org3549189" class="outline-3">
+<h3 id="org3549189"><span class="section-number-3">1.2.</span> Тесты</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">begin</span>
@@ -393,7 +393,7 @@ start), возвращающую бесконечный «ленивый» сп�
 Примеры вызова процедур сервером тестирования:
 </p>
 
-<pre class="example" id="org74b3861">
+<pre class="example" id="org5a4dfc5">
   (display (lazy-head (naturals 10) 12))
   (10 11 12 13 14 15 16 17 18 19 20 21)
 </pre>
@@ -420,7 +420,7 @@ start), возвращающую бесконечный «ленивый» сп�
 Примеры вызова процедур сервером тестирования:
 </p>
 
-<pre class="example" id="org4618139">
+<pre class="example" id="org8bed9d7">
   (begin
     (display (lazy-factorial 10)) (newline)
     (display (lazy-factorial 50)) (newline))
@@ -481,7 +481,7 @@ eof-object? и встроенные предикаты классификаци�
 Пример входных данных (⋅ &#x2014; пробел, ¶ &#x2014; конец строки):
 </p>
 
-<pre class="example" id="org117d07d">
+<pre class="example" id="org6879892">
 ⋅⋅one⋅two⋅three⋅⋅⋅¶ four⋅five⋅⋅six⋅⋅¶
 </pre>
 
@@ -489,13 +489,13 @@ eof-object? и встроенные предикаты классификаци�
 Результат вызова процедуры для этих входных данных:
 </p>
 
-<pre class="example" id="org3e62b22">
+<pre class="example" id="orgaefec23">
 (read-words) ⇒ ("one" "two" "three" "four" "five" "six")
 </pre>
 </div>
 
-<div id="outline-container-orgc9f8142" class="outline-3">
-<h3 id="orgc9f8142"><span class="section-number-3">3.1.</span> Решение</h3>
+<div id="outline-container-org93d9122" class="outline-3">
+<h3 id="org93d9122"><span class="section-number-3">3.1.</span> Решение</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">read-words</span><span style="color: #c678dd;">)</span>
@@ -514,8 +514,8 @@ eof-object? и встроенные предикаты классификаци�
 </div>
 </div>
 </div>
-<div id="outline-container-org2231af5" class="outline-3">
-<h3 id="org2231af5"><span class="section-number-3">3.2.</span> Тесты</h3>
+<div id="outline-container-org3e8c231" class="outline-3">
+<h3 id="org3e8c231"><span class="section-number-3">3.2.</span> Тесты</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">with-output-to-file</span> <span style="color: #98be65;">"home4.test"</span> <span style="color: #c678dd;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #98be65;">()</span>
@@ -559,7 +559,7 @@ eof-object? и встроенные предикаты классификаци�
 Пример использования каркаса:
 </p>
 
-<pre class="example" id="orgb02a342">
+<pre class="example" id="orgfab7637">
 (define-struct pos (row col)) ; Объявление типа pos
 (define p (make-pos 1 2))     ; Создание значения типа pos
 
@@ -587,13 +587,13 @@ eof-object? и встроенные предикаты классификаци�
 написав в начале программы следующую строку:
 </p>
 
-<pre class="example" id="org2f13757">
+<pre class="example" id="org5b076ff">
 (use-syntax (ice-9 syncase))
 </pre>
 </div>
 
-<div id="outline-container-org0b7f259" class="outline-3">
-<h3 id="org0b7f259"><span class="section-number-3">4.1.</span> Решение</h3>
+<div id="outline-container-orge07b145" class="outline-3">
+<h3 id="orge07b145"><span class="section-number-3">4.1.</span> Решение</h3>
 <div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">define-struct</span>
@@ -633,8 +633,8 @@ eof-object? и встроенные предикаты классификаци�
 </div>
 </div>
 </div>
-<div id="outline-container-org86392b2" class="outline-3">
-<h3 id="org86392b2"><span class="section-number-3">4.2.</span> Тесты</h3>
+<div id="outline-container-org8bc108e" class="outline-3">
+<h3 id="org8bc108e"><span class="section-number-3">4.2.</span> Тесты</h3>
 <div class="outline-text-3" id="text-4-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span>load <span style="color: #98be65;">"./unit-test.scm"</span><span style="color: #51afef;">)</span>
@@ -697,7 +697,7 @@ Test 5: (pos-col p) ok
 значение типа фигура:
 </p>
 
-<pre class="example" id="orgc10226c">
+<pre class="example" id="org2977da4">
 ; Определяем тип
 ;
 (define-data figure ((square a)
@@ -727,7 +727,7 @@ Test 5: (pos-col p) ok
 по формуле, выбранной в соответствии с вариантом фигуры:
 </p>
 
-<pre class="example" id="orgffb53b3">
+<pre class="example" id="org963c09a">
 (define pi (acos -1)) ; Для окружности
 
 (define (perim f)
@@ -758,8 +758,8 @@ Test 5: (pos-col p) ok
 сопоставление с образцом в других языках программирования.
 </p>
 </div>
-<div id="outline-container-org732ffda" class="outline-3">
-<h3 id="org732ffda"><span class="section-number-3">5.1.</span> Решение</h3>
+<div id="outline-container-org8e0d02a" class="outline-3">
+<h3 id="org8e0d02a"><span class="section-number-3">5.1.</span> Решение</h3>
 <div class="outline-text-3" id="text-5-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">define-data</span>
@@ -801,8 +801,8 @@ Test 5: (pos-col p) ok
 </div>
 </div>
 </div>
-<div id="outline-container-orgf7f8941" class="outline-3">
-<h3 id="orgf7f8941"><span class="section-number-3">5.2.</span> Тесты</h3>
+<div id="outline-container-org8823312" class="outline-3">
+<h3 id="org8823312"><span class="section-number-3">5.2.</span> Тесты</h3>
 <div class="outline-text-3" id="text-5-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #5B6268;">;; </span><span style="color: #5B6268;">&#1054;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1103;&#1077;&#1084; &#1090;&#1080;&#1087;</span>
@@ -875,14 +875,6 @@ Test 5: (pos-col p) ok
  'hello<span style="color: #51afef;">)</span>
 </pre>
 </div>
-
-<pre class="example">
-&lt;unnamed port&gt;:2530:0: In procedure module-lookup: Unbound variable: &lt;продолжение&gt;
-
-Entering a new prompt.  Type `,bt' for a backtrace or `,q' to continue.
-scheme@(guile-user) [2]&gt; 
-</pre>
-
 
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #a9a1e1;">(</span>x<span style="color: #a9a1e1;">)</span> x<span style="color: #98be65;">)</span> <span style="color: #98be65;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #a9a1e1;">(</span>x<span style="color: #a9a1e1;">)</span> x<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
@@ -986,7 +978,7 @@ Test 1: (my-let* ((x 5) (y (+ x 7))) y) ok
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Starovoytov Alexandr</p>
-<p class="date">Created: 2021-12-10 Fri 00:29</p>
+<p class="date">Created: 2021-12-10 Fri 00:33</p>
 </div>
 </body>
 </html>

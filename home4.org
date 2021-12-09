@@ -507,28 +507,28 @@ eof-object? и встроенные предикаты классификаци�
 
 - Объяснить, как и почему работает следующий фрагмент кода:
 
-  #+begin_src scheme
+  #+begin_src scheme :eval never :tangle no
 (((call-with-current-continuation
    (lambda (c) c))
   (lambda (x) x))
  'hello)
   #+end_src
 
-  #+begin_src scheme
+  #+begin_src scheme :eval never :tangle no
 ((<продолжение> (lambda (x) x))
  'hello)
   #+end_src
 
-  #+begin_src scheme
+  #+begin_src scheme :eval never :tangle no
 (((lambda (x) x) (lambda (x) x))
  'hello)
   #+end_src
 
-  #+begin_src scheme
+  #+begin_src scheme :eval never :tangle no
 ((lambda (x) x) 'hello)
   #+end_src
 
-  #+begin_src scheme
+  #+begin_src scheme :eval never :tangle no
 'hello
   #+end_src
 
@@ -588,7 +588,7 @@ eof-object? и встроенные предикаты классификаци�
 
 - Объяснить, почему от перемены мест слагаемых меняется сумма в этом
   примере *(1 балл):* [[file:pics/wtf.png]]
-  #+begin_src scheme :eval never
+  #+begin_src scheme :eval never :tangle no
 
 (define r #f)
 
