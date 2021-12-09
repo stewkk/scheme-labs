@@ -1,8 +1,7 @@
-* Домашнее задание №4
-  :PROPERTIES:
-  :CUSTOM_ID: домашнее-задание-4
-  :END:
-** 1. Мемоизация
+#+PROPERTY: header-args :results output :exports both :tangle ./home4.scm
+#+PROPERTY: header-args:scheme  :session *scheme*
+#+TITLE: Домашнее задание №4
+* 1. Мемоизация
    :PROPERTIES:
    :CUSTOM_ID: мемоизация
    :END:
@@ -34,8 +33,31 @@
   3628800
   30414093201713378043612608166064768844377641568960512000000000000
 #+end_example
+** Решение
+#+begin_src scheme :results none
+(define memoized-factorial
+  (let ((known-results '()))
+    (lambda (n)
+      (cond ((= n 0) 1)
+            ((assoc n known-results) -> (lambda (res) res))
+            (else (let ((res (* n (memoized-factorial (- n 1)))))
+                    (begin (cons '(n res) known-results)
+                           res)))))))
+#+end_src
+** Тесты
+#+begin_src scheme
+(begin
+  (display (memoized-factorial 10)) (newline)
+  (display (memoized-factorial 20)) (newline)
+  (display (memoized-factorial 50)) (newline))
+#+end_src
 
-** 2. Отложенные вычисления
+#+RESULTS:
+: 3628800
+: 2432902008176640000
+: 30414093201713378043612608166064768844377641568960512000000000000
+
+* 2. Отложенные вычисления
    :PROPERTIES:
    :CUSTOM_ID: отложенные-вычисления
    :END:
@@ -46,17 +68,46 @@
 - Гигиенический макрос /(lazy-cons a b),/ конструирующий ленивую
   точечную пару вида /(значение-a . обещание-вычислить-значение-b)./
   Почему макрос в данном случае предпочтительнее процедуры?
+  - Из-за порядка вычислений
+  #+begin_src scheme :results none
+(define-syntax lazy-cons
+  (syntax-rules ()
+    ((lazy-cons a b)
+     (delay (cons a b)))))
+  #+end_src
 - Процедуру /(lazy-car p),/ возвращающую значение 1-го элемента
   «ленивой» точечной пары /p./
+  #+begin_src scheme :results none
+(define (lazy-car p)
+  (car (force p)))
+  #+end_src
 - Процедуру /(lazy-cdr p),/ возвращающую значение 2-го элемента
   «ленивой» точечной пары /p./
+  #+begin_src scheme :results none
+(define (lazy-cdr p)
+  (cdr (force p)))
+  #+end_src
 
 На их основе определите:
 
 - Процедуру (lazy-head xs k), возвращающую значение k первых элементов
   «ленивого» списка xs в виде списка.
+  #+begin_src scheme :results none
+(define (lazy-head xs k)
+  (let loop ((xs xs) (k k) (res '()))
+    (if (= k 0)
+        (reverse res)
+        (loop (lazy-cdr xs) (- k 1) (cons (lazy-car xs) res)))))
+  #+end_src
 - Процедуру (lazy-ref xs k), возвращающую значение k-го элементa
   «ленивого» списка xs.
+  #+begin_src scheme :results none
+(define (lazy-ref xs k)
+  (let loop ((xs xs) (k k))
+    (if (= k 0)
+        (lazy-car xs)
+        (loop (lazy-cdr xs) (- k 1)))))
+  #+end_src
 
 Продемонстрируйте работу процедур на примере бесконечного списка
 натуральных чисел. Для этого определите процедуру-генератор (naturals
@@ -65,30 +116,58 @@ start), возвращающую бесконечный «ленивый» сп�
 
 Примеры вызова процедур сервером тестирования:
 
-#+begin_html
-  <pre>
-  (display (lazy-head (naturals 10) 12)) 
+#+begin_example
+  (display (lazy-head (naturals 10) 12))
   (10 11 12 13 14 15 16 17 18 19 20 21)
-  </pre>
-#+end_html
+#+end_example
+
+#+begin_src scheme
+(define (naturals start)
+  (lazy-cons start (naturals (+ start 1))))
+
+(display (lazy-head (naturals 10) 12))
+#+end_src
+
+#+RESULTS:
+: (10 11 12 13 14 15 16 17 18 19 20 21)
 
 Реализуйте процедуру (lazy-factorial n), которая возвращает значение n!,
 получая его из n-го элемента бесконечного списка факториалов.
 
 Примеры вызова процедур сервером тестирования:
 
-#+begin_html
-  <pre>
+#+begin_example
   (begin
     (display (lazy-factorial 10)) (newline)
     (display (lazy-factorial 50)) (newline))
 
   3628800
   30414093201713378043612608166064768844377641568960512000000000000
-  </pre>
-#+end_html
+#+end_example
 
-** 3. Чтение из потока
+#+begin_src scheme
+(define (factorials start val)
+  (lazy-cons val (factorials (+ start 1) (* val (+ start 1)))))
+
+(define (lazy-factorial n)
+  (lazy-ref (factorials 0 1) n))
+
+(begin
+  (display (lazy-factorial 10)) (newline)
+  (display (lazy-factorial 50)) (newline)
+  (display (lazy-factorial  1)) (newline)
+  (display (lazy-factorial  2)) (newline)
+  (display (lazy-factorial  0)) (newline))
+#+end_src
+
+#+RESULTS:
+: 3628800
+: 30414093201713378043612608166064768844377641568960512000000000000
+: 1
+: 2
+: 1
+
+* 3. Чтение из потока
    :PROPERTIES:
    :CUSTOM_ID: чтение-из-потока
    :END:
@@ -109,23 +188,43 @@ eof-object? и встроенные предикаты классификаци�
 
 Пример входных данных (⋅ --- пробел, ¶ --- конец строки):
 
-#+begin_html
-  <pre>
-  &sdot;&sdot;one&sdot;two&sdot;three&sdot;&sdot;&sdot;&para;
-  four&sdot;five&sdot;&sdot;six&sdot;&sdot;&para;
-  </pre>
-#+end_html
+#+begin_example
+⋅⋅one⋅two⋅three⋅⋅⋅¶ four⋅five⋅⋅six⋅⋅¶
+#+end_example
 
 Результат вызова процедуры для этих входных данных:
 
-#+begin_html
-  <pre>
-  (read-words)
-    &#8658; ("one" "two" "three" "four" "five" "six")
-  </pre>
-#+end_html
+#+begin_example
+(read-words) ⇒ ("one" "two" "three" "four" "five" "six")
+#+end_example
 
-** 4. Структуры (записи)
+** Решение
+#+begin_src scheme :results none
+(define (read-words)
+  (let loop ((res '())
+             (word '()))
+    (let ((cur (read-char)))
+      (cond ((eof-object? cur)
+             (reverse res))
+            ((char-whitespace? cur)
+             (if (null? word)
+                 (loop res word)
+                 (loop (cons (list->string (reverse word)) res)
+                       '())))
+            (else (loop res (cons cur word)))))))
+#+end_src
+** Тесты
+#+begin_src scheme
+(with-output-to-file "home4.test" (lambda ()
+                                   (display "  one two three\n four five  six  \n")))
+(with-input-from-file "home4.test" (lambda ()
+                                    (write (read-words))))
+#+end_src
+
+#+RESULTS:
+: ("one" "two" "three" "four" "five" "six")
+
+* 4. Структуры (записи)
    :PROPERTIES:
    :CUSTOM_ID: структуры-записи
    :END:
@@ -147,23 +246,21 @@ eof-object? и встроенные предикаты классификаци�
 
 Пример использования каркаса:
 
-#+begin_html
-  <pre>
-  (define-struct pos (row col)) ; Объявление типа pos
-  (define p (make-pos 1 2))     ; Создание значения типа pos
+#+begin_example
+(define-struct pos (row col)) ; Объявление типа pos
+(define p (make-pos 1 2))     ; Создание значения типа pos
 
-  (pos? p)    &#8658; #t
+(pos? p)    ⇒ #t
 
-  (pos-row p) &#8658; 1
-  (pos-col p) &#8658; 2
+(pos-row p) ⇒ 1
+(pos-col p) ⇒ 2
 
-  (set-pos-row! p 3) ; Изменение значения в поле row
-  (set-pos-col! p 4) ; Изменение значения в поле col
+(set-pos-row! p 3) ; Изменение значения в поле row
+(set-pos-col! p 4) ; Изменение значения в поле col
 
-  (pos-row p) &#8658; 3
-  (pos-col p) &#8658; 4
-  </pre>
-#+end_html
+(pos-row p) ⇒ 3
+(pos-col p) ⇒ 4
+#+end_example
 
 Рекомендация. Для более короткой записи решения можно (но не
 обязательно) использовать квазицитирование (quasiquotation).
@@ -173,13 +270,75 @@ eof-object? и встроенные предикаты классификаци�
 тестирования), то следует подключить модуль поддержки таких макросов,
 написав в начале программы следующую строку:
 
-#+begin_html
-  <pre>
-  (use-syntax (ice-9 syncase))
-  </pre>
-#+end_html
+#+begin_example
+(use-syntax (ice-9 syncase))
+#+end_example
 
-** 5. Алгебраические типы данных
+** Решение
+#+begin_src scheme :results none
+(define-syntax define-struct
+  (syntax-rules ()
+    ((_ sym-name sym-fields)
+     (let loop ((name (symbol->string 'sym-name))
+                (fields (map symbol->string 'sym-fields))
+                (i 2))
+       (if (null? fields)
+           (eval `(begin (define (,(string->symbol (string-append "make-"
+                                                                  name))
+                                  . vals)
+                           (list->vector (cons '_struct (cons 'sym-name vals))))
+                         (define (,(string->symbol (string-append name
+                                                                  "?"))
+                                  obj)
+                           (and (vector? obj)
+                                (eqv? '_struct (vector-ref obj 0))
+                                (eqv? 'sym-name (vector-ref obj 1)))))
+                 (interaction-environment))
+           (begin (eval `(begin (define (,(string->symbol (string-append name
+                                                                         "-"
+                                                                         (car fields)))
+                                         obj)
+                                  (vector-ref obj ,i))
+                                (define (,(string->symbol (string-append "set-"
+                                                                         name
+                                                                         "-"
+                                                                         (car fields)
+                                                                         "!"))
+                                         obj
+                                         val)
+                                  (vector-set! obj ,i val)))
+                        (interaction-environment))
+                  (loop name (cdr fields) (+ i 1))))))))
+#+end_src
+** Тесты
+#+begin_src scheme :eval never
+(load "./unit-test.scm")
+
+(define-struct pos (row col)) ; Объявление типа pos
+(define p (make-pos 1 2))     ; Создание значения типа pos
+
+(define struct-tests
+  (list (test (pos? p) #t)
+        (test (pos-row p) 1)
+        (test (pos-col p) 2)
+        (test (begin
+                (set-pos-row! p 3)
+                (set-pos-col! p 4)
+                (pos-row p))
+              3)
+        (test (pos-col p) 4)))
+
+(run-tests struct-tests)
+#+end_src
+
+#+RESULTS:
+: Test 1: (pos? p) ok
+: Test 2: (pos-row p) ok
+: Test 3: (pos-col p) ok
+: Test 4: (begin (set-pos-row! p 3) (set-pos-col! p 4) (pos-row p)) ok
+: Test 5: (pos-col p) ok
+
+* 5. Алгебраические типы данных
    :PROPERTIES:
    :CUSTOM_ID: алгебраические-типы-данных
    :END:
@@ -204,27 +363,27 @@ eof-object? и встроенные предикаты классификаци�
 значение типа фигура:
 
 #+begin_example
-  ; Определяем тип
-  ;
-  (define-data figure ((square a)
-                       (rectangle a b)
-                       (triangle a b c)
-                       (circle r)))
+; Определяем тип
+;
+(define-data figure ((square a)
+                    (rectangle a b)
+                    (triangle a b c)
+                    (circle r)))
 
-  ; Определяем значения типа
-  ;
-  (define s (square 10))
-  (define r (rectangle 10 20))
-  (define t (triangle 10 20 30))
-  (define c (circle 10))
+; Определяем значения типа
+;
+(define s (square 10))
+(define r (rectangle 10 20))
+(define t (triangle 10 20 30))
+(define c (circle 10))
 
-  ; Пусть определение алгебраического типа вводит
-  ; не только конструкторы, но и предикат этого типа:
-  ;
-  (and (figure? s)
-       (figure? r)
-       (figure? t)
-       (figure? c)) ⇒ #t
+; Пусть определение алгебраического типа вводит
+; не только конструкторы, но и предикат этого типа:
+;
+(and (figure? s)
+    (figure? r)
+    (figure? t)
+    (figure? c)) ⇒ #t
 #+end_example
 
 Функция расчета периметра или длины окружности --- единая для всех
@@ -232,18 +391,18 @@ eof-object? и встроенные предикаты классификаци�
 по формуле, выбранной в соответствии с вариантом фигуры:
 
 #+begin_example
-  (define pi (acos -1)) ; Для окружности
-    
-  (define (perim f)
-    (match f 
-      ((square a)       (* 4 a))
-      ((rectangle a b)  (* 2 (+ a b)))
-      ((triangle a b c) (+ a b c))
-      ((circle r)       (* 2 pi r))))
-    
-  (perim s) ⇒ 40
-  (perim r) ⇒ 60
-  (perim t) ⇒ 60
+(define pi (acos -1)) ; Для окружности
+
+(define (perim f)
+  (match f
+         ((square a)       (* 4 a))
+         ((rectangle a b)  (* 2 (+ a b)))
+         ((triangle a b c) (+ a b c))
+         ((circle r)       (* 2 pi r))))
+
+(perim s) ⇒ 40
+(perim r) ⇒ 60
+(perim t) ⇒ 60
 #+end_example
 
 Здесь =match= --- сопоставление с образцом. В данном примере при
@@ -257,8 +416,91 @@ eof-object? и встроенные предикаты классификаци�
 обязательно) использовать квазицитирование (quasiquotation). По
 литературе и ресурсам Интернет ознакомьтесь с тем, как работает
 сопоставление с образцом в других языках программирования.
+** Решение
+#+begin_src scheme :results none
+(define-syntax define-data
+  (syntax-rules ()
+    ((_ name _constructors)
+     (let loop ((constructors '_constructors))
+       (if (null? constructors)
+           ;; определим предикат
+           (eval `(define (,(string->symbol (string-append (symbol->string 'name)
+                                                           "?"))
+                           obj)
+                    (and (list? obj)
+                         (eqv? '_data (car obj))
+                         (eqv? 'name (cadr obj))))
+                 (interaction-environment))
+           ;; определим конструктор
+           (begin (eval `(define (,(caar constructors)
+                                  . params)
+                           (append (list '_data
+                                         'name
+                                         ',(caar constructors))
+                                   params))
+                        (interaction-environment))
+                  (loop (cdr constructors))))))))
 
-** «Ачивки»
+(define-syntax match
+  (syntax-rules ()
+    ((_ val ((name params ...) expr))
+     (apply (lambda (params ...)
+              expr)
+            (cdddr val)))
+    ((_ val ((name params ...) expr) patterns ...)
+     (if (eqv? 'name (caddr val))
+         (apply (lambda (params ...)
+                  expr)
+                (cdddr val))
+         (match val patterns ...)))))
+#+end_src
+** Тесты
+#+begin_src scheme
+;; Определяем тип
+(define-data figure ((square a)
+                     (rectangle a b)
+                     (triangle a b c)
+                     (circle r)))
+
+;; Определяем значения типа
+(define s (square 10))
+(define r (rectangle 10 20))
+(define t (triangle 10 20 30))
+(define c (circle 10))
+
+(display (and (figure? s)
+              (figure? r)
+              (figure? t)
+              (figure? c)))
+(newline)
+
+(define pi (acos -1)) ;; Для окружности
+
+(define (perim f)
+  (match f
+         ((square a)       (* 4 a))
+         ((rectangle a b)  (* 2 (+ a b)))
+         ((triangle a b c) (+ a b c))
+         ((circle r)       (* 2 pi r))))
+
+(display (perim s))
+(newline)
+(display (perim r))
+(newline)
+(display (perim t))
+(newline)
+(display (perim c))
+(newline)
+#+end_src
+
+#+RESULTS:
+: #t
+: 40
+: 60
+: 60
+: 62.83185307179586
+
+* «Ачивки»
    :PROPERTIES:
    :CUSTOM_ID: ачивки
    :END:
@@ -266,10 +508,28 @@ eof-object? и встроенные предикаты классификаци�
 - Объяснить, как и почему работает следующий фрагмент кода:
 
   #+begin_src scheme
-    (((call-with-current-continuation
-       (lambda (c) c))
-      (lambda (x) x))
-     'hello)
+(((call-with-current-continuation
+   (lambda (c) c))
+  (lambda (x) x))
+ 'hello)
+  #+end_src
+
+  #+begin_src scheme
+((<продолжение> (lambda (x) x))
+ 'hello)
+  #+end_src
+
+  #+begin_src scheme
+(((lambda (x) x) (lambda (x) x))
+ 'hello)
+  #+end_src
+
+  #+begin_src scheme
+((lambda (x) x) 'hello)
+  #+end_src
+
+  #+begin_src scheme
+'hello
   #+end_src
 
   Можно догадаться, что этот код печатает =hello=, но нужно объяснить
@@ -279,5 +539,67 @@ eof-object? и встроенные предикаты классификаци�
   (многоточий, =...=) (и, конечно, встроенных =let=, =let*=, =letrec=)
   *+1 балл* за оба.
 
+  #+begin_src scheme :eval never
+(define-syntax my-let
+  (syntax-rules ()
+    ((_ ((var val)) expr)
+     ((lambda (var)
+        expr) val))
+    ((_ ((var val) . others) expr)
+     ((lambda (var)
+        (my-let others
+                 expr)) val))))
+
+(define-syntax my-let*
+  (syntax-rules ()
+    ((_ ((var val)) expr)
+     ((lambda (var)
+        expr) val))
+    ((_ ((var val) . others) expr)
+     ((lambda (var)
+        (my-let* others
+                 expr)) val))))
+
+(load "./unit-test.scm")
+
+(define tests
+  (list
+   (test (my-let ((x 5) (y 7))
+                 (+ x 1 y))
+         13)
+   (test (my-let ((=> #f))
+           (cond (#t => 'ok)))
+         ok)))
+
+(run-tests tests)
+
+(define tests
+  (list
+   (test (my-let* ((x 5) (y (+ x 7)))
+                  y) 12)))
+
+(run-tests tests)
+  #+end_src
+
+  #+RESULTS:
+  : Test 1: (my-let ((x 5) (y 7)) (+ x 1 y)) ok
+  : Test 2: (my-let ((=> #f)) (cond (#t => (quote ok)))) ok
+  : Test 1: (my-let* ((x 5) (y (+ x 7))) y) ok
+
 - Объяснить, почему от перемены мест слагаемых меняется сумма в этом
   примере *(1 балл):* [[file:pics/wtf.png]]
+  #+begin_src scheme :eval never
+
+(define r #f)
+
+(define (g x)
+  (set! x (+
+           x ;; x из первого вызова g, т.к. будет сохранено в стеке
+           (call-with-current-continuation
+            (lambda (ret)
+              (set! r ret)
+              0))
+           x ;; x из последнего вызова, т.к. set! изменит переменную сохраненную в континуации
+           ))
+  x)
+  #+end_src
