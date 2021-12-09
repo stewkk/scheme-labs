@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-28 Sun 23:00 -->
+<!-- 2021-12-09 Thu 14:20 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Лабораторная работа №4</title>
@@ -206,27 +206,27 @@
 <ul>
 <li><a href="#продолжения.">2.1. 1. Продолжения.</a>
 <ul>
-<li><a href="#orgd8ccaee">2.1.1. решение</a></li>
-<li><a href="#org1de95e8">2.1.2. тесты</a></li>
+<li><a href="#org4f39b48">2.1.1. решение</a></li>
+<li><a href="#org698bb5a">2.1.2. тесты</a></li>
 </ul>
 </li>
 <li><a href="#код-как-данные.-порты-ввода-вывода.">2.2. 2. Код как данные. Порты ввода-вывода.</a></li>
 <li><a href="#мемоизация-результатов-вычислений.">2.3. 3. Мемоизация результатов вычислений.</a>
 <ul>
-<li><a href="#orga2c0df8">2.3.1. Решение без мемоизации</a></li>
-<li><a href="#org3a9e9df">2.3.2. Решение с мемоизацией</a></li>
+<li><a href="#org6541e08">2.3.1. Решение без мемоизации</a></li>
+<li><a href="#orgb08e461">2.3.2. Решение с мемоизацией</a></li>
 </ul>
 </li>
 <li><a href="#отложенные-вычисления.">2.4. 4. Отложенные вычисления.</a>
 <ul>
-<li><a href="#org191ae04">2.4.1. Решение</a></li>
-<li><a href="#org3b44654">2.4.2. Тесты</a></li>
+<li><a href="#orgb8454f0">2.4.1. Решение</a></li>
+<li><a href="#org302841f">2.4.2. Тесты</a></li>
 </ul>
 </li>
 <li><a href="#локальные-определения.">2.5. 5. Локальные определения.</a>
 <ul>
-<li><a href="#org0b6ec86">2.5.1. Решение</a></li>
-<li><a href="#orgf24a134">2.5.2. Тесты</a></li>
+<li><a href="#orgaf633f6">2.5.1. Решение</a></li>
+<li><a href="#org61646a8">2.5.2. Тесты</a></li>
 </ul>
 </li>
 <li><a href="#управляющие-конструкции.">2.6. 6. Управляющие конструкции.</a>
@@ -311,7 +311,7 @@
 показанного выше:
 </p>
 
-<pre class="example" id="org65be105">
+<pre class="example" id="org247c6a4">
 FAILED: (not (zero? x))
 </pre>
 
@@ -322,12 +322,12 @@ FAILED: (not (zero? x))
 написав в начале программы следующую строку:
 </p>
 
-<pre class="example" id="orge082932">
+<pre class="example" id="org76cbdc8">
   (use-syntax (ice-9 syncase))
 </pre>
 </div>
-<div id="outline-container-orgd8ccaee" class="outline-4">
-<h4 id="orgd8ccaee"><span class="section-number-4">2.1.1.</span> решение</h4>
+<div id="outline-container-org4f39b48" class="outline-4">
+<h4 id="org4f39b48"><span class="section-number-4">2.1.1.</span> решение</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <div class="org-src-container">
 <pre class="src src-scheme">
@@ -353,8 +353,8 @@ FAILED: (not (zero? x))
 </div>
 </div>
 </div>
-<div id="outline-container-org1de95e8" class="outline-4">
-<h4 id="org1de95e8"><span class="section-number-4">2.1.2.</span> тесты</h4>
+<div id="outline-container-org698bb5a" class="outline-4">
+<h4 id="org698bb5a"><span class="section-number-4">2.1.2.</span> тесты</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">1/x</span> x<span style="color: #c678dd;">)</span>
@@ -391,7 +391,7 @@ FAILED: (not (zero? x))
 последующего чтения данных (десериализации) из такого файла:
 </p>
 
-<pre class="example" id="org0035615">
+<pre class="example" id="orgc9e1fdd">
 (save-data данные путь-к-файлу)
 (load-data путь-к-файлу) ⇒ данные
 </pre>
@@ -420,7 +420,7 @@ FAILED: (not (zero? x))
 решение
 </p>
 <div class="org-src-container">
-<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">file-nonempty-lines-count</span> path<span style="color: #c678dd;">)</span>
+<pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">file-nonempty-lines-count-old</span> path<span style="color: #c678dd;">)</span>
   <span style="color: #c678dd;">(</span><span style="color: #51afef;">with-input-from-file</span> path <span style="color: #98be65;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #a9a1e1;">()</span>
                                <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">loop</span> <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>prev #\newline<span style="color: #c678dd;">)</span>
                                           <span style="color: #c678dd;">(</span>k <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
@@ -433,6 +433,17 @@ FAILED: (not (zero? x))
                                                 <span style="color: #51afef;">(</span>not <span style="color: #c678dd;">(</span>equal? #\newline prev<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
                                            <span style="color: #a9a1e1;">(</span>loop cur <span style="color: #51afef;">(</span>+ k <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
                                            <span style="color: #a9a1e1;">(</span>loop cur k<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">file-nonempty-lines-count</span> file<span style="color: #c678dd;">)</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">with-input-from-file</span> file <span style="color: #98be65;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #a9a1e1;">()</span>
+                               <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">loop</span> <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>k <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+                                 <span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span>cur <span style="color: #a9a1e1;">(</span>read-char<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+                                   <span style="color: #c678dd;">(</span><span style="color: #51afef;">cond</span> <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span>eof-object? cur<span style="color: #a9a1e1;">)</span>
+                                          k<span style="color: #98be65;">)</span>
+                                         <span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span><span style="color: #51afef;">and</span> <span style="color: #51afef;">(</span>not <span style="color: #c678dd;">(</span>equal? cur #\newline<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+                                               <span style="color: #51afef;">(</span><span style="color: #51afef;">or</span> <span style="color: #c678dd;">(</span>eof-object? <span style="color: #98be65;">(</span>peek-char<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+                                                   <span style="color: #c678dd;">(</span>equal? <span style="color: #98be65;">(</span>peek-char<span style="color: #98be65;">)</span> #\newline<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+                                          <span style="color: #a9a1e1;">(</span>loop <span style="color: #51afef;">(</span>+ k <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+                                         <span style="color: #98be65;">(</span><span style="color: #51afef;">else</span> <span style="color: #a9a1e1;">(</span>loop k<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
 </pre>
 </div></li>
 
@@ -440,12 +451,15 @@ FAILED: (not (zero? x))
 тесты
 </p>
 <div class="org-src-container">
-<pre class="src src-scheme"><span style="color: #51afef;">(</span>display <span style="color: #c678dd;">(</span>file-nonempty-lines-count <span style="color: #98be65;">"./lab4.org"</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<pre class="src src-scheme"><span style="color: #51afef;">(</span>display <span style="color: #c678dd;">(</span>file-nonempty-lines-count-old <span style="color: #98be65;">"./lab4.org"</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span>newline<span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span>display <span style="color: #c678dd;">(</span>file-nonempty-lines-count <span style="color: #98be65;">"./lab4.org"</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
 </pre>
 </div>
 
 <pre class="example">
-688
+702
+702
 </pre></li>
 </ul></li>
 </ul>
@@ -462,14 +476,14 @@ FAILED: (not (zero? x))
 </p>
 
 
-<div id="orgb244dc6" class="figure">
+<div id="org2cda3b8" class="figure">
 <p><img src="lab3v2-trib.gif" alt="lab3v2-trib.gif" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Функция</p>
 </div>
 
 
-<div id="org6c4222d" class="figure">
+<div id="org7a3c246" class="figure">
 <p><img src="lab3v2-trib-domain.gif" alt="lab3v2-trib-domain.gif" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Область определения функции</p>
@@ -484,8 +498,8 @@ FAILED: (not (zero? x))
 </p>
 </div>
 
-<div id="outline-container-orga2c0df8" class="outline-4">
-<h4 id="orga2c0df8"><span class="section-number-4">2.3.1.</span> Решение без мемоизации</h4>
+<div id="outline-container-org6541e08" class="outline-4">
+<h4 id="org6541e08"><span class="section-number-4">2.3.1.</span> Решение без мемоизации</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">tribonacci</span> n<span style="color: #c678dd;">)</span>
@@ -502,7 +516,7 @@ FAILED: (not (zero? x))
 </div>
 </div>
 <ol class="org-ol">
-<li><a id="orge695fd5"></a>Тесты<br />
+<li><a id="org805070d"></a>Тесты<br />
 <div class="outline-text-5" id="text-2-3-1-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span>load <span style="color: #98be65;">"./unit-test.scm"</span><span style="color: #51afef;">)</span>
@@ -526,7 +540,7 @@ FAILED: (not (zero? x))
 </pre>
 </div>
 
-<pre class="example" id="org5ea682d">
+<pre class="example" id="org4ef573d">
 Test 1: (tribonacci 0) ok
 Test 2: (tribonacci 1) ok
 Test 3: (tribonacci 2) ok
@@ -535,18 +549,18 @@ Test 5: (tribonacci 4) ok
 Test 6: (tribonacci 4) ok
 Test 7: (tribonacci 5) ok
 clock utime stime cutime cstime gctime
- 0.01  0.04  0.00   0.00   0.00   0.04
+ 0.01  0.06  0.00   0.00   0.00   0.05
 clock utime stime cutime cstime gctime
- 0.59  2.90  0.07   0.00   0.00   2.77
+ 0.62  2.77  0.20   0.00   0.00   2.81
 clock utime stime cutime cstime gctime
- 0.48  2.23  0.03   0.00   0.00   2.09
+ 0.69  3.20  0.11   0.00   0.00   3.16
 </pre>
 </div>
 </li>
 </ol>
 </div>
-<div id="outline-container-org3a9e9df" class="outline-4">
-<h4 id="org3a9e9df"><span class="section-number-4">2.3.2.</span> Решение с мемоизацией</h4>
+<div id="outline-container-orgb08e461" class="outline-4">
+<h4 id="orgb08e461"><span class="section-number-4">2.3.2.</span> Решение с мемоизацией</h4>
 <div class="outline-text-4" id="text-2-3-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">tribonacci-memo</span>
@@ -567,7 +581,7 @@ clock utime stime cutime cstime gctime
 </div>
 </div>
 <ol class="org-ol">
-<li><a id="orgac7f513"></a>Тесты<br />
+<li><a id="orgb0332a7"></a>Тесты<br />
 <div class="outline-text-5" id="text-2-3-2-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span>load <span style="color: #98be65;">"./unit-test.scm"</span><span style="color: #51afef;">)</span>
@@ -591,7 +605,7 @@ clock utime stime cutime cstime gctime
 </pre>
 </div>
 
-<pre class="example" id="orgcd7890f">
+<pre class="example" id="org900a165">
 Test 1: (tribonacci-memo 0) ok
 Test 2: (tribonacci-memo 1) ok
 Test 3: (tribonacci-memo 2) ok
@@ -600,11 +614,11 @@ Test 5: (tribonacci-memo 4) ok
 Test 6: (tribonacci-memo 4) ok
 Test 7: (tribonacci-memo 5) ok
 clock utime stime cutime cstime gctime
- 0.06  0.05  0.00   0.00   0.00   0.00
+ 0.13  0.18  0.00   0.00   0.00   0.07
 clock utime stime cutime cstime gctime
- 7.29  7.71  0.09   0.00   0.00   0.83
+13.13 14.57  0.27   0.00   0.00   2.25
 clock utime stime cutime cstime gctime
- 0.02  0.01  0.00   0.00   0.00   0.00
+ 0.02  0.02  0.00   0.00   0.00   0.00
 </pre>
 </div>
 </li>
@@ -623,7 +637,7 @@ clock utime stime cutime cstime gctime
 корректно:
 </p>
 
-<pre class="example" id="orga4872ce">
+<pre class="example" id="orgd47d851">
   (my-if #t 1 (/ 1 0)) ⇒ 1
   (my-if #f (/ 1 0) 1) ⇒ 1
 </pre>
@@ -634,8 +648,8 @@ clock utime stime cutime cstime gctime
 </p>
 </div>
 
-<div id="outline-container-org191ae04" class="outline-4">
-<h4 id="org191ae04"><span class="section-number-4">2.4.1.</span> Решение</h4>
+<div id="outline-container-orgb8454f0" class="outline-4">
+<h4 id="orgb8454f0"><span class="section-number-4">2.4.1.</span> Решение</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">my-if</span>
@@ -648,8 +662,8 @@ clock utime stime cutime cstime gctime
 </div>
 </div>
 </div>
-<div id="outline-container-org3b44654" class="outline-4">
-<h4 id="org3b44654"><span class="section-number-4">2.4.2.</span> Тесты</h4>
+<div id="outline-container-org302841f" class="outline-4">
+<h4 id="org302841f"><span class="section-number-4">2.4.2.</span> Тесты</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span>load <span style="color: #98be65;">"./unit-test.scm"</span><span style="color: #51afef;">)</span>
@@ -677,12 +691,12 @@ Test 3: (my-if (= (+ 1 1) 2) 2 (/ 1 0)) ok
 поведение встроенных макросов <code>let</code> и <code>let*</code>.
 </p>
 </div>
-<div id="outline-container-org0b6ec86" class="outline-4">
-<h4 id="org0b6ec86"><span class="section-number-4">2.5.1.</span> Решение</h4>
+<div id="outline-container-orgaf633f6" class="outline-4">
+<h4 id="orgaf633f6"><span class="section-number-4">2.5.1.</span> Решение</h4>
 <div class="outline-text-4" id="text-2-5-1">
 </div>
 <ol class="org-ol">
-<li><a id="orge5fa4d4"></a>let<br />
+<li><a id="org8bab1fe"></a>let<br />
 <div class="outline-text-5" id="text-2-5-1-1">
 <p>
 первое приближение:
@@ -716,7 +730,7 @@ Test 3: (my-if (= (+ 1 1) 2) 2 (/ 1 0)) ok
 </div>
 </div>
 </li>
-<li><a id="org0b8272b"></a>let*<br />
+<li><a id="org280fd19"></a>let*<br />
 <div class="outline-text-5" id="text-2-5-1-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">my-let*</span>
@@ -736,12 +750,12 @@ Test 3: (my-if (= (+ 1 1) 2) 2 (/ 1 0)) ok
 </li>
 </ol>
 </div>
-<div id="outline-container-orgf24a134" class="outline-4">
-<h4 id="orgf24a134"><span class="section-number-4">2.5.2.</span> Тесты</h4>
+<div id="outline-container-org61646a8" class="outline-4">
+<h4 id="org61646a8"><span class="section-number-4">2.5.2.</span> Тесты</h4>
 <div class="outline-text-4" id="text-2-5-2">
 </div>
 <ol class="org-ol">
-<li><a id="org06abcd4"></a>let<br />
+<li><a id="org8e04d78"></a>let<br />
 <div class="outline-text-5" id="text-2-5-2-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">tests</span>
@@ -763,7 +777,7 @@ Test 2: (my-let ((=&gt; #f)) (cond (#t =&gt; (quote ok)))) ok
 </pre>
 </div>
 </li>
-<li><a id="orgc28b91b"></a>let*<br />
+<li><a id="org84f3725"></a>let*<br />
 <div class="outline-text-5" id="text-2-5-2-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">tests</span>
@@ -828,14 +842,14 @@ Test 1: (my-let* ((x 5) (y (+ x 7))) y) ok
 В стандартный поток будет выведено:
 </p>
 
-<pre class="example" id="org9e7b1e3">
+<pre class="example" id="orge1938db">
   x &gt; 0
   x != 0
 </pre>
 </div>
 
 <ol class="org-ol">
-<li><a id="org6775e60"></a>Решение<br />
+<li><a id="orgfe7df05"></a>Решение<br />
 <div class="outline-text-5" id="text-2-6-1-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">when</span>
@@ -853,7 +867,7 @@ Test 1: (my-let* ((x 5) (y (+ x 7))) y) ok
 </div>
 </div>
 </li>
-<li><a id="orgf8e3a3d"></a>Тесты<br />
+<li><a id="orgb557d8e"></a>Тесты<br />
 <div class="outline-text-5" id="text-2-6-1-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">x</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #51afef;">)</span>
@@ -910,7 +924,7 @@ x != 0
 </div>
 </div>
 <ol class="org-ol">
-<li><a id="orgb95b718"></a>Решение<br />
+<li><a id="orgf0eca4c"></a>Решение<br />
 <div class="outline-text-5" id="text-2-6-2-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">for</span>
@@ -927,7 +941,7 @@ x != 0
 </div>
 </div>
 </li>
-<li><a id="org449a2ae"></a>Тесты<br />
+<li><a id="orga6b989d"></a>Тесты<br />
 <div class="outline-text-5" id="text-2-6-2-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span>for i in '<span style="color: #c678dd;">(</span><span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">2</span> <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #c678dd;">)</span>
@@ -942,7 +956,7 @@ x != 0
 </pre>
 </div>
 
-<pre class="example" id="orgb5b9e90">
+<pre class="example" id="org30337d9">
 (1 4)
 (1 5)
 (1 6)
@@ -1008,7 +1022,7 @@ x != 0
 Выведет:
 </p>
 
-<pre class="example" id="orgd41c28a">
+<pre class="example" id="orgc121973">
   (0 0)
   (0 1)
   (0 2)
@@ -1029,7 +1043,7 @@ x != 0
 рекурсивные определения, например:
 </p>
 
-<pre class="example" id="orgc32a139">
+<pre class="example" id="org11d07c2">
   (letrec ((iter (lambda (i)
                    (if (= i 10)
                        '()
@@ -1040,7 +1054,7 @@ x != 0
 </div>
 
 <ol class="org-ol">
-<li><a id="orgd478627"></a>Решение<br />
+<li><a id="org4cf2a49"></a>Решение<br />
 <div class="outline-text-5" id="text-2-6-3-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">while</span>
@@ -1054,7 +1068,7 @@ x != 0
 </div>
 </div>
 </li>
-<li><a id="org3350c24"></a>Тесты<br />
+<li><a id="orgda3ee1b"></a>Тесты<br />
 <div class="outline-text-5" id="text-2-6-3-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span>p <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
@@ -1126,7 +1140,7 @@ x != 0
 Выведет:
 </p>
 
-<pre class="example" id="org6560127">
+<pre class="example" id="orgf828448">
   (0 0)(0 1)(0 2)
   (1 0)(1 1)(1 2)
   (2 0)(2 1)(2 2)
@@ -1134,7 +1148,7 @@ x != 0
 </div>
 
 <ol class="org-ol">
-<li><a id="org1f5f2b4"></a>Решение<br />
+<li><a id="org2091d8e"></a>Решение<br />
 <div class="outline-text-5" id="text-2-6-4-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">repeat</span>
@@ -1147,7 +1161,7 @@ x != 0
 </div>
 </div>
 </li>
-<li><a id="org203bd6a"></a>Тесты<br />
+<li><a id="org1a2079e"></a>Тесты<br />
 <div class="outline-text-5" id="text-2-6-4-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span>i <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
@@ -1170,7 +1184,7 @@ x != 0
 </div>
 </li>
 
-<li><a id="orgb49a81b"></a>Без тела цикла в скобках<br />
+<li><a id="orga30af2a"></a>Без тела цикла в скобках<br />
 <div class="outline-text-5" id="text-2-6-4-3">
 <p>
 Подумайте, зачем требуется заключать тело цикла в круглые скобки? Как
@@ -1214,7 +1228,7 @@ x != 0
 поток вывода вида:
 </p>
 
-<pre class="example" id="orgbb70d1f">
+<pre class="example" id="orgcad7c3d">
   (cout &lt;&lt; "a = " &lt;&lt; 1 &lt;&lt; endl &lt;&lt; "b = " &lt;&lt; 2 &lt;&lt; endl)
 </pre>
 
@@ -1228,13 +1242,13 @@ x != 0
 Данный пример выведет следующий текст:
 </p>
 
-<pre class="example" id="org01235e0">
+<pre class="example" id="orgb5c778d">
   a = 1
   b = 2
 </pre>
 </div>
 <ol class="org-ol">
-<li><a id="org109a644"></a>Решение<br />
+<li><a id="org8550e9c"></a>Решение<br />
 <div class="outline-text-5" id="text-2-6-5-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define-syntax</span> <span style="color: #dcaeea;">cout</span>
@@ -1253,7 +1267,7 @@ x != 0
 </div>
 </div>
 </li>
-<li><a id="org952b421"></a>Тесты<br />
+<li><a id="org8c80f74"></a>Тесты<br />
 <div class="outline-text-5" id="text-2-6-5-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span>cout &lt;&lt; <span style="color: #98be65;">"a = "</span> &lt;&lt; <span style="color: #da8548; font-weight: bold;">1</span> &lt;&lt; endl &lt;&lt; <span style="color: #98be65;">"b = "</span> &lt;&lt; <span style="color: #da8548; font-weight: bold;">2</span> &lt;&lt; endl<span style="color: #51afef;">)</span>
@@ -1273,7 +1287,7 @@ b = 2
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Starovoytov Alexandr</p>
-<p class="date">Created: 2021-11-28 Sun 23:00</p>
+<p class="date">Created: 2021-12-09 Thu 14:20</p>
 </div>
 </body>
 </html>
