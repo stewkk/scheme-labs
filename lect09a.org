@@ -30,8 +30,8 @@ Scheme R5RS --- не промышленный, а академический,
 Создание порта:
 
 #+begin_example
-  (open-input-port "имя файла")      → port
-  (open-output-port "имя файла")     → port
+  (open-input-file "имя файла")      → port
+  (open-output-file "имя файла")     → port
 #+end_example
 
 Предусловие для =open-output-port=: файл существовать не должен (иначе
