@@ -1,4 +1,4 @@
-#+PROPERTY: header-args :results output :exports both :tangle yes
+#+PROPERTY: header-args :results output :exports both :tangle home1.scm
 #+PROPERTY: header-args:scheme  :session *scheme*
 
 * Домашнее задание №1
