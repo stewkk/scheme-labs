@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-12-11 Sat 17:32 -->
+<!-- 2021-12-11 Sat 17:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lrm;</title>
+<title>Домашнее задание №1</title>
 <meta name="author" content="Starovoytov Alexandr" />
 <meta name="generator" content="Org Mode" />
 <style>
@@ -196,50 +196,54 @@
 </head>
 <body>
 <div id="content" class="content">
+<h1 class="title">Домашнее задание №1</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#домашнее-задание-1">1. Домашнее задание №1</a>
+<li><a href="#определение-дня-недели-по-дате">1. 1. Определение дня недели по дате</a>
 <ul>
-<li><a href="#определение-дня-недели-по-дате">1.1. 1. Определение дня недели по дате</a>
+<li><a href="#orga35bb02">1.1. алгоритм Сакамото</a>
 <ul>
-<li><a href="#org6714036">1.1.1. алгоритм Сакамото</a></li>
-<li><a href="#org83af919">1.1.2. алгоритм Сакамото без <code>string-ref</code></a></li>
-<li><a href="#org8f45b19">1.1.3. алгоритм с wikibooks</a></li>
+<li><a href="#org33fd50a">1.1.1. тесты</a></li>
 </ul>
 </li>
-<li><a href="#действительные-корни-квадратного-уравнения">1.2. 2. Действительные корни квадратного уравнения</a>
+<li><a href="#orgf38bca8">1.2. алгоритм Сакамото без <code>string-ref</code></a>
 <ul>
-<li><a href="#orgc5ebece">1.2.1. решение</a></li>
-<li><a href="#org5e81875">1.2.2. тесты</a></li>
+<li><a href="#orgcb3dad3">1.2.1. тесты</a></li>
 </ul>
 </li>
-<li><a href="#нод-нок-и-проверка-числа-на-простоту">1.3. 3. НОД, НОК и проверка числа на простоту</a>
+<li><a href="#org07034b6">1.3. алгоритм с wikibooks</a>
 <ul>
-<li><a href="#orge294250">1.3.1. решение</a></li>
-<li><a href="#org82893ae">1.3.2. тесты</a></li>
+<li><a href="#org269af6b">1.3.1. тесты</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#действительные-корни-квадратного-уравнения">2. 2. Действительные корни квадратного уравнения</a>
+<ul>
+<li><a href="#org02c2f2c">2.1. решение</a></li>
+<li><a href="#org08f5330">2.2. тесты</a></li>
+</ul>
+</li>
+<li><a href="#нод-нок-и-проверка-числа-на-простоту">3. 3. НОД, НОК и проверка числа на простоту</a>
+<ul>
+<li><a href="#org407a9fc">3.1. решение</a></li>
+<li><a href="#org3fb789b">3.2. тесты</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-домашнее-задание-1" class="outline-2">
-<h2 id="домашнее-задание-1"><span class="section-number-2">1.</span> Домашнее задание №1</h2>
-<div class="outline-text-2" id="text-домашнее-задание-1">
 <p>
 При выполнении заданий <b>не используйте</b> присваивание и циклы. Избегайте
 возврата логических значений из условных конструкций. Подготовьте
 примеры для демонстрации работы разработанных вами процедур.
 </p>
-</div>
 
-<div id="outline-container-определение-дня-недели-по-дате" class="outline-3">
-<h3 id="определение-дня-недели-по-дате"><span class="section-number-3">1.1.</span> 1. Определение дня недели по дате</h3>
-<div class="outline-text-3" id="text-определение-дня-недели-по-дате">
+<div id="outline-container-определение-дня-недели-по-дате" class="outline-2">
+<h2 id="определение-дня-недели-по-дате"><span class="section-number-2">1.</span> 1. Определение дня недели по дате</h2>
+<div class="outline-text-2" id="text-определение-дня-недели-по-дате">
 <p>
 Определите процедуру <code>day-of-week</code>, вычисляющую день недели по дате по
 григорианскому календарю. Воспользуйтесь алгоритмом, описанным в
@@ -253,16 +257,16 @@
 Пример вызова процедуры:
 </p>
 
-<pre class="example" id="org5ed3f64">
+<pre class="example" id="org1298642">
   (day-of-week 04 12 1975) ⇒ 4
   (day-of-week 04 12 2006) ⇒ 1
   (day-of-week 29 05 2013) ⇒ 3
 </pre>
 </div>
 
-<div id="outline-container-org6714036" class="outline-4">
-<h4 id="org6714036"><span class="section-number-4">1.1.1.</span> алгоритм Сакамото</h4>
-<div class="outline-text-4" id="text-1-1-1">
+<div id="outline-container-orga35bb02" class="outline-3">
+<h3 id="orga35bb02"><span class="section-number-3">1.1.</span> алгоритм Сакамото</h3>
+<div class="outline-text-3" id="text-1-1">
 <p>
 <a href="https://www.geeksforgeeks.org/tomohiko-sakamotos-algorithm-finding-day-week/">источник</a>
 </p>
@@ -283,9 +287,9 @@
 </pre>
 </div>
 </div>
-<ol class="org-ol">
-<li><a id="orgcdb535b"></a>тесты<br />
-<div class="outline-text-5" id="text-1-1-1-1">
+<div id="outline-container-org33fd50a" class="outline-4">
+<h4 id="org33fd50a"><span class="section-number-4">1.1.1.</span> тесты</h4>
+<div class="outline-text-4" id="text-1-1-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">test-day-of-week</span> name<span style="color: #c678dd;">)</span>
   <span style="color: #c678dd;">(</span>display name<span style="color: #c678dd;">)</span>
@@ -323,7 +327,7 @@
 </pre>
 </div>
 
-<pre class="example" id="orgd4d189f">
+<pre class="example" id="org3d813bc">
 Sakamoto's:
 04 12 1975 4
 04 12 2006 1
@@ -337,13 +341,12 @@ Sakamoto's:
 
 </pre>
 </div>
-</li>
-</ol>
+</div>
 </div>
 
-<div id="outline-container-org83af919" class="outline-4">
-<h4 id="org83af919"><span class="section-number-4">1.1.2.</span> алгоритм Сакамото без <code>string-ref</code></h4>
-<div class="outline-text-4" id="text-1-1-2">
+<div id="outline-container-orgf38bca8" class="outline-3">
+<h3 id="orgf38bca8"><span class="section-number-3">1.2.</span> алгоритм Сакамото без <code>string-ref</code></h3>
+<div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">day-of-week-fixed-month</span> day month year<span style="color: #c678dd;">)</span>
   <span style="color: #c678dd;">(</span>remainder <span style="color: #98be65;">(</span>+ year
@@ -372,15 +375,15 @@ Sakamoto's:
 </pre>
 </div>
 </div>
-<ol class="org-ol">
-<li><a id="orgf63ae32"></a>тесты<br />
-<div class="outline-text-5" id="text-1-1-2-1">
+<div id="outline-container-orgcb3dad3" class="outline-4">
+<h4 id="orgcb3dad3"><span class="section-number-4">1.2.1.</span> тесты</h4>
+<div class="outline-text-4" id="text-1-2-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span>test-day-of-week <span style="color: #98be65;">"Sakamoto 2:"</span><span style="color: #51afef;">)</span>
 </pre>
 </div>
 
-<pre class="example" id="orgb62d94e">
+<pre class="example" id="org18c715a">
 Sakamoto 2:
 04 12 1975 4
 04 12 2006 1
@@ -394,12 +397,11 @@ Sakamoto 2:
 
 </pre>
 </div>
-</li>
-</ol>
 </div>
-<div id="outline-container-org8f45b19" class="outline-4">
-<h4 id="org8f45b19"><span class="section-number-4">1.1.3.</span> алгоритм с wikibooks</h4>
-<div class="outline-text-4" id="text-1-1-3">
+</div>
+<div id="outline-container-org07034b6" class="outline-3">
+<h3 id="org07034b6"><span class="section-number-3">1.3.</span> алгоритм с wikibooks</h3>
+<div class="outline-text-3" id="text-1-3">
 <p>
 <a href="https://ru.wikibooks.org/wiki/%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8_%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%BE%D0%B2/%D0%92%D0%B5%D1%87%D0%BD%D1%8B%D0%B9_%D0%BA%D0%B0%D0%BB%D0%B5%D0%BD%D0%B4%D0%B0%D1%80%D1%8C">ссылка</a>
 </p>
@@ -420,15 +422,15 @@ Sakamoto 2:
 </pre>
 </div>
 </div>
-<ol class="org-ol">
-<li><a id="orgfe99c61"></a>тесты<br />
-<div class="outline-text-5" id="text-1-1-3-1">
+<div id="outline-container-org269af6b" class="outline-4">
+<h4 id="org269af6b"><span class="section-number-4">1.3.1.</span> тесты</h4>
+<div class="outline-text-4" id="text-1-3-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span>test-day-of-week <span style="color: #98be65;">"ru.wikibooks.org:"</span><span style="color: #51afef;">)</span>
 </pre>
 </div>
 
-<pre class="example" id="org608cc13">
+<pre class="example" id="orgb6d971c">
 ru.wikibooks.org:
 04 12 1975 4
 04 12 2006 1
@@ -442,14 +444,13 @@ ru.wikibooks.org:
 
 </pre>
 </div>
-</li>
-</ol>
+</div>
 </div>
 </div>
 
-<div id="outline-container-действительные-корни-квадратного-уравнения" class="outline-3">
-<h3 id="действительные-корни-квадратного-уравнения"><span class="section-number-3">1.2.</span> 2. Действительные корни квадратного уравнения</h3>
-<div class="outline-text-3" id="text-действительные-корни-квадратного-уравнения">
+<div id="outline-container-действительные-корни-квадратного-уравнения" class="outline-2">
+<h2 id="действительные-корни-квадратного-уравнения"><span class="section-number-2">2.</span> 2. Действительные корни квадратного уравнения</h2>
+<div class="outline-text-2" id="text-действительные-корни-квадратного-уравнения">
 <p>
 Определите процедуру, принимающую коэффициенты <i>a</i>, <i>b</i> и <i>c</i>
 квадратного уравнения вида /ax/²+/bx/+/c/=0 и возвращающую список чисел
@@ -461,15 +462,15 @@ ru.wikibooks.org:
 <b>Указание:</b> для формирования списка используйте функцию <code>(list …)</code>:
 </p>
 
-<pre class="example" id="org7d51b9b">
+<pre class="example" id="orgf6a8431">
   (list)        → ()
   (list 10)     → (10)
   (list 10 11)  → (10 11)
 </pre>
 </div>
-<div id="outline-container-orgc5ebece" class="outline-4">
-<h4 id="orgc5ebece"><span class="section-number-4">1.2.1.</span> решение</h4>
-<div class="outline-text-4" id="text-1-2-1">
+<div id="outline-container-org02c2f2c" class="outline-3">
+<h3 id="org02c2f2c"><span class="section-number-3">2.1.</span> решение</h3>
+<div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">D</span> a b c<span style="color: #c678dd;">)</span>
   <span style="color: #c678dd;">(</span>- <span style="color: #98be65;">(</span>* b b<span style="color: #98be65;">)</span>
@@ -489,9 +490,9 @@ ru.wikibooks.org:
 </div>
 </div>
 </div>
-<div id="outline-container-org5e81875" class="outline-4">
-<h4 id="org5e81875"><span class="section-number-4">1.2.2.</span> тесты</h4>
-<div class="outline-text-4" id="text-1-2-2">
+<div id="outline-container-org08f5330" class="outline-3">
+<h3 id="org08f5330"><span class="section-number-3">2.2.</span> тесты</h3>
+<div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span>display <span style="color: #c678dd;">(</span>quadratic_equation <span style="color: #da8548; font-weight: bold;">2</span> <span style="color: #da8548; font-weight: bold;">5</span> <span style="color: #da8548; font-weight: bold;">-3</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span> <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">-3 1/2</span>
 <span style="color: #51afef;">(</span>newline<span style="color: #51afef;">)</span>
@@ -514,9 +515,9 @@ ru.wikibooks.org:
 </div>
 </div>
 
-<div id="outline-container-нод-нок-и-проверка-числа-на-простоту" class="outline-3">
-<h3 id="нод-нок-и-проверка-числа-на-простоту"><span class="section-number-3">1.3.</span> 3. НОД, НОК и проверка числа на простоту</h3>
-<div class="outline-text-3" id="text-нод-нок-и-проверка-числа-на-простоту">
+<div id="outline-container-нод-нок-и-проверка-числа-на-простоту" class="outline-2">
+<h2 id="нод-нок-и-проверка-числа-на-простоту"><span class="section-number-2">3.</span> 3. НОД, НОК и проверка числа на простоту</h2>
+<div class="outline-text-2" id="text-нод-нок-и-проверка-числа-на-простоту">
 <p>
 Определите:
 </p>
@@ -537,16 +538,16 @@ ru.wikibooks.org:
 <li>Примеры вызова процедур:</li>
 </ul>
 
-<pre class="example" id="org6633c65">
+<pre class="example" id="org84508e4">
   (my-gcd 3542 2464) ⇒ 154
   (my-lcm 3 4)       ⇒  12
   (prime? 11)        ⇒  #t
   (prime? 12)        ⇒  #f
 </pre>
 </div>
-<div id="outline-container-orge294250" class="outline-4">
-<h4 id="orge294250"><span class="section-number-4">1.3.1.</span> решение</h4>
-<div class="outline-text-4" id="text-1-3-1">
+<div id="outline-container-org407a9fc" class="outline-3">
+<h3 id="org407a9fc"><span class="section-number-3">3.1.</span> решение</h3>
+<div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">(</span><span style="color: #c678dd;">my-gcd</span> a b<span style="color: #c678dd;">)</span>
   <span style="color: #c678dd;">(</span><span style="color: #51afef;">if</span> <span style="color: #98be65;">(</span>= b <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">)</span>
@@ -574,9 +575,9 @@ ru.wikibooks.org:
 </div>
 </div>
 </div>
-<div id="outline-container-org82893ae" class="outline-4">
-<h4 id="org82893ae"><span class="section-number-4">1.3.2.</span> тесты</h4>
-<div class="outline-text-4" id="text-1-3-2">
+<div id="outline-container-org3fb789b" class="outline-3">
+<h3 id="org3fb789b"><span class="section-number-3">3.2.</span> тесты</h3>
+<div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-scheme"><span style="color: #51afef;">(</span>display <span style="color: #c678dd;">(</span>prime? <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
 <span style="color: #51afef;">(</span>newline<span style="color: #51afef;">)</span>
@@ -614,10 +615,9 @@ ru.wikibooks.org:
 </div>
 </div>
 </div>
-</div>
 <div id="postamble" class="status">
 <p class="author">Author: Starovoytov Alexandr</p>
-<p class="date">Created: 2021-12-11 Sat 17:32</p>
+<p class="date">Created: 2021-12-11 Sat 17:40</p>
 </div>
 </body>
 </html>
