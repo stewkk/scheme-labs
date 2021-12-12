@@ -220,7 +220,7 @@
   (call-with-current-continuation
    (lambda (error)
      (define res (program stream error))
-     (and (eqv? (peek stream) "EOF")
+     (and (equal? (peek stream) "EOF")
           res))))
 
 (load "unit-test.scm")

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-12-12 Sun 15:59 -->
+<!-- 2021-12-12 Sun 20:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Лабораторная работа №6</title>
@@ -233,7 +233,7 @@
 преобразования строки к числу.
 </p>
 
-<pre class="example" id="org9c4608a">
+<pre class="example" id="org57ac01a">
 &lt;дробь&gt;           ::= &lt;число-со-знаком&gt; / &lt;число-без-знака&gt;
 &lt;число-со-знаком&gt; ::= + &lt;число-без-знака&gt; | - &lt;число-без-знака&gt; | &lt;число-без-знака&gt;
 &lt;число-без-знака&gt; ::= ЦИФРА &lt;хвост-числа&gt;
@@ -316,7 +316,7 @@ Test 5: (check-frac "FF/10") ok
 обработки сканером.
 </p>
 
-<pre class="example" id="orgb2d5d23">
+<pre class="example" id="orgbb06dd2">
 &lt;дробь&gt;           ::= &lt;число-со-знаком&gt; / &lt;число-без-знака&gt;
 &lt;число-со-знаком&gt; ::= + &lt;число-без-знака&gt; | - &lt;число-без-знака&gt; | &lt;число-без-знака&gt;
 &lt;число-без-знака&gt; ::= ЦИФРА &lt;хвост-числа&gt;
@@ -404,7 +404,7 @@ Test 5: (scan-frac "FF/10") ok
 сканером.
 </p>
 
-<pre class="example" id="orga834acb">
+<pre class="example" id="orgb5b19ce">
 &lt;список-дробей&gt;   ::= &lt;пробелы&gt; &lt;дробь&gt; &lt;пробелы&gt; &lt;список-дробей&gt; | &lt;пусто&gt;
 &lt;пробелы&gt;         ::= ПРОБЕЛЬНЫЙ-СИМВОЛ &lt;пробелы&gt; | &lt;пусто&gt;
 &lt;дробь&gt;           ::= &lt;число-со-знаком&gt; / &lt;число-без-знака&gt;
@@ -502,7 +502,7 @@ Test 3: (scan-many-fracs "\t1/2 1/32/-5") ok
 Примеры вызова процедур:
 </p>
 
-<pre class="example" id="orgab5e9ca">
+<pre class="example" id="org11df4bb">
      (check-frac "110/111") ⇒ #t
      (check-frac "-4/3")    ⇒ #t
      (check-frac "+5/10")   ⇒ #t
@@ -542,7 +542,7 @@ Test 3: (scan-many-fracs "\t1/2 1/32/-5") ok
 рекурсивного спуска согласно следующей грамматикe:
 </p>
 
-<pre class="example" id="org1cfc9da">
+<pre class="example" id="org25d0730">
      &lt;Program&gt;  ::= &lt;Articles&gt; &lt;Body&gt; .
      &lt;Articles&gt; ::= &lt;Article&gt; &lt;Articles&gt; | .
      &lt;Article&gt;  ::= define word &lt;Body&gt; end .
@@ -556,7 +556,7 @@ Test 3: (scan-many-fracs "\t1/2 1/32/-5") ok
 возвращать <code>#f</code>. Примеры применения процедуры:
 </p>
 
-<pre class="example" id="org3de6d89">
+<pre class="example" id="orgb09b7cb">
      (parse #(1 2 +)) ⇒ (() (1 2 +))
 
      (parse #(x dup 0 swap if drop -1 endif))
@@ -633,7 +633,7 @@ Test 3: (scan-many-fracs "\t1/2 1/32/-5") ok
   <span style="color: #c678dd;">(</span><span style="color: #51afef;">call-with-current-continuation</span>
    <span style="color: #98be65;">(</span><span style="color: #51afef;">lambda</span> <span style="color: #a9a1e1;">(</span>error<span style="color: #a9a1e1;">)</span>
      <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">define</span> <span style="color: #c678dd;">res</span> <span style="color: #51afef;">(</span>program stream error<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
-     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">and</span> <span style="color: #51afef;">(</span>eqv? <span style="color: #c678dd;">(</span>peek stream<span style="color: #c678dd;">)</span> <span style="color: #98be65;">"EOF"</span><span style="color: #51afef;">)</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">and</span> <span style="color: #51afef;">(</span>equal? <span style="color: #c678dd;">(</span>peek stream<span style="color: #c678dd;">)</span> <span style="color: #98be65;">"EOF"</span><span style="color: #51afef;">)</span>
           res<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
 </pre>
 </div>
@@ -716,7 +716,7 @@ Test 6: (parse #(define =0? dup 0 = end define gcd =0? if drop exit endif swap o
 <li><p>
 &lt;Body&gt; в определении &lt;Arcticle&gt; заменится на &lt;Program&gt;:
 </p>
-<pre class="example" id="org8e32713">
+<pre class="example" id="org6c293f9">
 &lt;Program&gt;  ::= &lt;Articles&gt; &lt;Body&gt; .
 &lt;Articles&gt; ::= &lt;Article&gt; &lt;Articles&gt; | .
 &lt;Article&gt;  ::= define word &lt;Program&gt; end .
@@ -729,7 +729,7 @@ Test 6: (parse #(define =0? dup 0 = end define gcd =0? if drop exit endif swap o
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Starovoytov Alexandr</p>
-<p class="date">Created: 2021-12-12 Sun 15:59</p>
+<p class="date">Created: 2021-12-12 Sun 20:38</p>
 </div>
 </body>
 </html>
