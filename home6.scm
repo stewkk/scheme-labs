@@ -1,4 +1,3 @@
-
 (define (tokenize str)
   (load "appendix/parser/stream.scm")
   (define (expression stream error)
@@ -74,13 +73,19 @@
      (and (eqv? (peek stream) 'EOF)
           res))))
 
-  ;; Expr    ::= Term Expr1 .
-  ;; Expr1   ::= AddOp Term Expr1 | .
-  ;; Term    ::= Factor Term1 .
-  ;; Term1   ::= MulOp Factor Term1 | .
-  ;; Factor  ::= Power Factor1 .
-  ;; Factor1 ::= PowOp Power Factor1 | .
-  ;; Power   ::= value | "(" Expr ")" | unaryMinus Power .
+(load "unit-test.scm")
+
+(define tokenize-tests
+  (list (test (tokenize "1")
+              (1))
+        (test (tokenize "-a")
+              (- a))
+        (test (tokenize "-a + b * x^2 + dy")
+              (- a + b * x ^ 2 + dy))
+        (test (tokenize "(a - 1)/(b + 1)")
+              ("(" a - 1 ")" / "(" b + 1 ")"))))
+
+(run-tests tokenize-tests)
 
 (define (parse tokens)
   (load "appendix/parser/stream.scm")
