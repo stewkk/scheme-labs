@@ -7,7 +7,7 @@ sub output-node(@prefix) {
                 print "├── ";
             }
             when 2 {
-               print "└── ";
+                print "└── ";
             }
             when 3 {
                 print "│   ";
@@ -47,16 +47,19 @@ sub MAIN(
         }
         if $path.d {
             try {
-               for @prefix <-> $el {
+                for @prefix <-> $el {
                     given $el {
                         when 2 {$el = 4};
                         when 1 {$el = 3};
                     }
                 }
                 @prefix.push(1);
-                my @contents = [($_, @prefix.clone) for ($d
-                                                         ?? dir($path, test => { "$path/$_".IO.d ?& ! /^^ \./ })
-                                                         !! dir($path, test => { ! /^^ \./ })).sort(&lc)];
+                my @contents = [($_, @prefix.clone)
+                                for ($d
+                                     ?? dir($path,
+                                            test => { "$path/$_".IO.d ?& ! /^^ \./ })
+                                     !! dir($path,
+                                            test => { ! /^^ \./ })).sort(&lc)];
                 if @contents {
                     @contents[*-1;1;*-1] = 2;
                 }
