@@ -1,4 +1,5 @@
 #+TITLE: Лабораторная работа №7
+#+AUTHOR: Starovoytov Alexandr
 * Цель работы
    :PROPERTIES:
    :CUSTOM_ID: цель-работы
