@@ -2,7 +2,7 @@
 
 sub get-stats($data, $name, $m, $c, $w, $l) {
     if !$m ?& !$c ?& !$w ?& !$l {
-        print $data.chars, " ", $data.words.elems, " ", $data.encode.bytes, " ";
+        print $data.lines.elems, " ", $data.words.elems, " ", $data.encode.bytes, " ";
     } else {
         if $l {
             print $data.lines.elems, " ";
