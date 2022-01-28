@@ -1,0 +1,167 @@
+\documentclass[12pt,a4paper,oneside,titlepage]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{geometry}
+
+\begin{document}
+
+% НАЧАЛО ТИТУЛЬНОГО ЛИСТА
+\begin{center}
+  \hfill \break
+  \textbf{
+    \footnotesize{Министерство науки и высшего образования Российской Федерации}\\
+    \hfill \break
+    \footnotesize{Федеральное государственное бюджетное образовательное учреждение высшего образования}\\
+    \small{«МОСКОВСКИЙ ГОСУДАРСТВЕННЫЙ ТЕХНИЧЕСКИЙ УНИВЕРСИТЕТ имени Н.Э.БАУМАНА\\(национальный исследовательский университет)»}}\\
+\end{center}
+\hfill \break
+\normalsize{Факультет: Информатика и системы управления}\\
+\hfill \break
+\normalsize{Кафедра: Теоретическая информатика и компьютерные технологии}\\
+\hfill\break
+\begin{center}
+  \textbf{\large{Рубежный контроль №3}}\\
+  \large{Конспект по языку \bfseries{Raku}}\\
+\end{center}
+\hfill \break
+\hfill \break
+\hfill \break
+\begin{flushright}
+  \normalsize{
+    Выполнил\\
+    студент группы ИУ9-11Б\\
+    Старовойтов Александр
+  }
+\end{flushright}
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+
+\begin{center} Москва, 2021 \end{center}
+\thispagestyle{empty} % выключаем отображение номера для этой страницы
+% КОНЕЦ ТИТУЛЬНОГО ЛИСТА
+
+\newgeometry{margin=0.5in}
+\begin{multicols*}{2}
+
+  \section{Типы}
+
+  Последовательная типизация:
+
+  \begin{itemize}
+    \item{\lstinline|my $var;| --- динамическая, неявная}
+    \item{\lstinline|my Str $var;| --- статическая, явная}
+  \end{itemize}
+
+  \lstinline|$var.WHAT;| --- вернет тип переменной
+
+  Слабая типизация:
+  \begin{lstlisting}
+    my $var = "2";
+    say $var.WHAT; # (Str)
+    $var *= 2;
+    say $var; # 4
+    say $var.WHAT; # (Int)
+  \end{lstlisting}
+
+  \section{Управляющие конструкции}
+
+  \begin{itemize}
+    \item{\lstinline|if <condition> {...}| --- выполняет блок в \{\}, если <condition>.Bool == True}
+    \item{\lstinline|else/elsif| --- альтернативные ветки для if}
+    \item{\lstinline|unless <condition> {...}| --- выполняет блок в \{\}, если <condition>.Bool == False}
+    \item{\lstinline|with <condition> {...}| --- выполняет блок в \{\}, если <condition> определено}
+    \item{\lstinline|for @array -> $item {...}| --- выполняет блок \{\} для каждого элемена @array}
+    \item{\begin{lstlisting}
+given $var {
+    when 0..50 { say '<= 50' }
+    default  { say 'default' }
+}
+\end{lstlisting}
+          aналог switch}
+    \item{\lstinline|loop (my $i = 0; $i < 5; $i++) {...}| --- for в си-стиле}
+  \end{itemize}
+
+  \section{Функциональный стиль}
+
+   Иммутабельность --- префикс \lstinline|constant|:
+   \lstinline|my constant $var = 5;|
+
+   Функции --- объекты первого класса:
+
+   \begin{lstlisting}
+my $f= -> $n { $n + 3 };
+sub g($f, $n) {
+    $f($n);
+}
+say g($f, 7) # 10
+   \end{lstlisting}
+
+   Встроенные функции высших порядков для работы с последовательностями:
+   \begin{itemize}
+     \item{\lstinline|map|
+           \begin{lstlisting}
+my @array = <1 2 3>;
+sub squared($x) {
+  $x ** 2
+}
+say map(&squared,@array); # (1 4 9)
+           \end{lstlisting}}
+     \item{\lstinline|reduce|
+           \begin{lstlisting}
+sub f($a, $b) {
+    $a + $b;
+}
+say reduce(&f, (1, 2, 3)); # 6
+           \end{lstlisting}}
+   \end{itemize}
+
+  \section{IO, строки, регулярные выражения}
+
+  \subsection{IO}
+  \lstinline|$*IN, $*OUT, $*ERR| --- хендлеры для stdin, stdout, stderr
+
+  \begin{itemize}
+    \item{\lstinline|say|} --- вывести в stdout с переносом строки
+    \item{\lstinline|print|} --- вывести в stdout без переноса строки
+    \item{\lstinline|note|} --- вывод в stderr
+  \end{itemize}
+
+  Пример перенаправления stdout:
+
+  \begin{lstlisting}
+my $output-file = open "file.txt", :w;
+$*OUT = $output-file;
+  \end{lstlisting}
+
+  \subsection{строки}
+
+  \begin{itemize}
+    \item{\lstinline|indices|} --- поиск подстроки в строке
+    \item{\lstinline|substr|} --- взятие подстроки
+    \item{\lstinline|containt|} --- содержит ли подстроку строка
+  \end{itemize}
+
+  \subsection{регулярные выражения}
+
+  Оператор \lstinline|~~| - матчит регулярное выражение с строкой:
+  \begin{lstlisting}
+'enlightenment' ~~ m/ light /
+  \end{lstlisting}
+
+\end{multicols*}
+
+\end{document}
